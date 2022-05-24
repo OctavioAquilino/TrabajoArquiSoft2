@@ -46,9 +46,10 @@ func (s *carritoService) GetCarritos() (dto.CarritosDto, e.ApiError) {
 
 	for _, carrito := range carritos {
 		var carritoDto dto.CarritoDto
-		carritoDto.Name = carrito.Name
-		carritoDto.Price = carrito.Price
-		carritoDto.Id = carrito.Id
+		carritoDto.MontoFinal = carrito.MontoFinal
+		//carritoDto.Productos = carrito.Productos
+		//manejar con un for
+		carritoDto.IdCarrito = carrito.Id
 
 		carritosDto = append(carritosDto, carritoDto)
 	}
@@ -60,12 +61,12 @@ func (s *carritoService) InsertCarrito(carritoDto dto.CarritoDto) (dto.CarritoDt
 
 	var carrito model.Carrito
 
-	carrito.Name = carritoDto.Name
-	carrito.Price = carritoDto.Price
+	carrito.MontoFinal = carritoDto.MontoFinal
+	//carrito.Productos = carritoDto.Productos
 
 	carrito = carritoCliente.InsertCarrito(carrito)
 
-	carritoDto.Id = carrito.Id
+	carritoDto.IdCarrito = carrito.Id
 
 	return carritoDto, nil
 }
