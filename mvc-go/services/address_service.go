@@ -36,10 +36,10 @@ func (s *addressService) GetAddressById(id int) (dto.AddressDto, e.ApiError) {
 		return addressDto, e.NewBadRequestApiError("address not found")
 	}
 	addressDto.Id = address.Id
-	addressDto.Numero = address.Number
-	addressDto.Barrio = address.Neighborhood
-	addressDto.Calle = address.Street
-	addressDto.Ciudad = address.City
+	addressDto.Number = address.Number
+	addressDto.Neighborhood = address.Neighborhood
+	addressDto.Street = address.Street
+	addressDto.City = address.City
 	return addressDto, nil
 }
 
@@ -51,10 +51,10 @@ func (s *addressService) GetAddresses() (dto.AddressesDto, e.ApiError) {
 	for _, address := range addresses {
 		var addressDto dto.AddressDto
 		addressDto.Id = address.Id
-		addressDto.Numero = address.Number
-		addressDto.Barrio = address.Neighborhood
-		addressDto.Calle = address.Street
-		addressDto.Ciudad = address.City
+		addressDto.Number = address.Number
+		addressDto.Neighborhood = address.Neighborhood
+		addressDto.Street = address.Street
+		addressDto.City = address.City
 		addressesDto = append(addressesDto, addressDto)
 	}
 
@@ -66,10 +66,10 @@ func (s *addressService) InsertAddress(addressDto dto.AddressDto) (dto.AddressDt
 	var address model.Address
 
 	//	addressDto.Id = address.Id
-	address.Number = addressDto.Numero
-	address.Neighborhood = addressDto.Barrio
-	address.Street = addressDto.Calle
-	address.City = addressDto.Ciudad
+	address.Number = addressDto.Number
+	address.Neighborhood = addressDto.Neighborhood
+	address.Street = addressDto.Street
+	address.City = addressDto.City
 
 	address = addressCliente.InsertAddress(address)
 
