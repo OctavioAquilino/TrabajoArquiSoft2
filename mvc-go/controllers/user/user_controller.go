@@ -1,6 +1,7 @@
 package userController
 
 import (
+	"fmt"
 	"mvc-go/dto"
 	service "mvc-go/services"
 	"net/http"
@@ -13,7 +14,8 @@ import (
 
 func GetUserById(c *gin.Context) {
 	log.Debug("User id to load: " + c.Param("id"))
-
+	//panic("error")
+	fmt.Println("Pancho se la come")
 	id, _ := strconv.Atoi(c.Param("id")) //se pasa el id de array a int
 	var userDto dto.UserDto
 
