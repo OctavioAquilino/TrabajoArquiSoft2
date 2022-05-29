@@ -3,6 +3,9 @@ package db
 import (
 	//product "mvc-go/clients/product"
 	addressClient "mvc-go/clients/address"
+	categoryClient "mvc-go/clients/category"
+	orderClient "mvc-go/clients/order"
+	orderDetailClient "mvc-go/clients/order_detail"
 	productClient "mvc-go/clients/product"
 	userClient "mvc-go/clients/user"
 	"mvc-go/model"
@@ -39,7 +42,9 @@ func init() {
 	userClient.Db = db
 	productClient.Db = db
 	addressClient.Db = db
-
+	categoryClient.Db = db
+	orderDetailClient.Db = db
+	orderClient.Db = db
 }
 
 func StartDbEngine() {
@@ -47,5 +52,8 @@ func StartDbEngine() {
 	db.AutoMigrate(&model.User{}) //se debe agreagar por cada carpeta del model
 	db.AutoMigrate(&model.Product{})
 	db.AutoMigrate(&model.Address{})
+	db.AutoMigrate(&model.Category{})
+	db.AutoMigrate(&model.OrderDetail{})
+	db.AutoMigrate(&model.Order{})
 	log.Info("Finishing Migration Database Tables")
 }
