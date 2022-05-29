@@ -7,6 +7,7 @@ import (
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
+	//"mvc-go/utils/modeladto"
 )
 
 type orderService struct{}
@@ -38,8 +39,14 @@ func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 	orderDto.Estado = order.Estado
 	orderDto.Fecha = order.Fecha
 	orderDto.MontoFinal = order.MontoFinal
-	//orderDto.OrderDetail = order.OrderDetail ---------
-	//orderDto.Usuario = order.Usuario -----------------manejar
+	//orderDto.OrderDetail = order.OrderDetail --------- creo que no va
+	//orderDto.Usuario = order.Usuario
+	orderDto.Usuario.Id = order.Usuario.Id
+	orderDto.Usuario.LastName = order.Usuario.LastName
+	orderDto.Usuario.Name = order.Usuario.Name
+	orderDto.Usuario.Password = order.Usuario.Password
+	orderDto.Usuario.UserName = order.Usuario.UserName
+
 	return orderDto, nil
 }
 
