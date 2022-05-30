@@ -15,7 +15,6 @@ type productServiceInterface interface {
 	//siempre devuelve dto o error
 	GetProductById(id int) (dto.ProductDto, e.ApiError)
 	GetProducts() (dto.ProductsDto, e.ApiError)
-	InsertProduct(productDto dto.ProductDto) (dto.ProductDto, e.ApiError)
 }
 
 var (
@@ -54,18 +53,4 @@ func (s *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 	}
 
 	return productsDto, nil
-}
-
-func (s *productService) InsertProduct(productDto dto.ProductDto) (dto.ProductDto, e.ApiError) {
-
-	var product model.Product
-
-	product.Name = productDto.Name
-	product.Price = productDto.Price
-
-	product = productCliente.InsertProduct(product)
-
-	productDto.Id = product.Id
-
-	return productDto, nil
 }

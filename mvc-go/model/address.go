@@ -6,7 +6,7 @@ type Address struct {
 	Neighborhood string `gorm:"type:varchar(250);not null"`
 	Street       string `gorm:"type:varchar(150);not null"`
 	Number       int    `gorm:"type:int(150);not null"`
-	User         User
+	IdUser       int    `gorm:"type:integer;not null"`
 }
 
 type Addresses []Address

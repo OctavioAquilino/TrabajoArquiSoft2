@@ -15,7 +15,6 @@ type categoryServiceInterface interface {
 	//siempre devuelve dto o error
 	GetCategoryById(id int) (dto.CategoryDto, e.ApiError)
 	GetCategories() (dto.CategoriesDto, e.ApiError)
-	InsertCategory(categoryDto dto.CategoryDto) (dto.CategoryDto, e.ApiError)
 }
 
 var (
@@ -55,18 +54,4 @@ func (s *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {
 	}
 
 	return categoriesDto, nil
-}
-
-func (s *categoryService) InsertCategory(categoryDto dto.CategoryDto) (dto.CategoryDto, e.ApiError) {
-
-	var category model.Category
-
-	category.Name = categoryDto.Nombre
-	category.Description = categoryDto.Descripcion
-
-	category = categoryCliente.InsertCategory(category)
-
-	categoryDto.IdCategory = category.Id
-
-	return categoryDto, nil
 }

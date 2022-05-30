@@ -17,7 +17,7 @@ type userServiceInterface interface {
 	//siempre devuelve dto o error
 	GetUserById(id int) (dto.UserDto, e.ApiError)
 	GetUsers() (dto.UsersDto, e.ApiError)
-	InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError)
+
 	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
 }
 
@@ -70,8 +70,6 @@ func (s *userService) InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError) 
 	user.LastName = userDto.LastName
 	user.UserName = userDto.UserName
 	user.Password = userDto.Password
-
-	user = userCliente.InsertUser(user)
 
 	userDto.Id = user.Id
 

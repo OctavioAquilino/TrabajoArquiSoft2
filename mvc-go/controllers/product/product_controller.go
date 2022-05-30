@@ -37,24 +37,3 @@ func GetProducts(c *gin.Context) {
 
 	c.JSON(http.StatusOK, productsDto)
 }
-
-func ProductInsert(c *gin.Context) {
-	var productDto dto.ProductDto
-	err := c.BindJSON(&productDto) //marshall, convierte de json a productDto
-
-	// Error Parsing json param
-	if err != nil {
-		log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, err.Error())
-		return
-	}
-
-	productDto, er := service.ProductService.InsertProduct(productDto) //delega, simpre envia dto
-	// Error del Insert
-	if er != nil {
-		c.JSON(er.Status(), er)
-		return
-	}
-
-	c.JSON(http.StatusCreated, productDto)
-}

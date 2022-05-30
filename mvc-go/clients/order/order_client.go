@@ -38,12 +38,3 @@ func InsertOrder(order model.Order) model.Order {
 	log.Debug("Order Created: ", order.Id)
 	return order
 }
-
-func GetOrderByOrderName(orderName string) model.Order {
-	var order model.Order
-
-	Db.Where("order_name = ?", orderName).First(&order) //traduccion y seteo en order
-	//	log.Debug("Order: ", order)
-
-	return order
-}

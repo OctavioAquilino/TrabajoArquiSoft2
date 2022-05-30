@@ -27,23 +27,3 @@ func GetProducts() model.Products {
 
 	return products
 }
-
-func InsertProduct(product model.Product) model.Product {
-	result := Db.Create(&product)
-
-	if result.Error != nil {
-		//TODO Manage Errors
-		log.Error("")
-	}
-	log.Debug("Product Created: ", product.Id)
-	return product
-}
-
-func GetProductByProductName(productName string) model.Product {
-	var product model.Product
-
-	Db.Where("product_name = ?", productName).First(&product) //traduccion y seteo en product
-	//	log.Debug("Product: ", product)
-
-	return product
-}
