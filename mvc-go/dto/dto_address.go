@@ -10,5 +10,3 @@ type AddressDto struct {
 }
 
 type AddressesDto []AddressDto
-
-//..
