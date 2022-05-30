@@ -35,17 +35,12 @@ func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 	if order.Id == 0 {
 		return orderDto, e.NewBadRequestApiError("order not found")
 	}
-	orderDto.IdOrder = order.Id
-	orderDto.Estado = order.Estado
+	orderDto.Id = order.Id
 	orderDto.Fecha = order.Fecha
 	orderDto.MontoFinal = order.MontoFinal
+	orderDto.IdUsuario = order.IdUser
 	//orderDto.OrderDetail = order.OrderDetail --------- creo que no va
 	//orderDto.Usuario = order.Usuario
-	orderDto.Usuario.Id = order.Usuario.Id
-	orderDto.Usuario.LastName = order.Usuario.LastName
-	orderDto.Usuario.Name = order.Usuario.Name
-	orderDto.Usuario.Password = order.Usuario.Password
-	orderDto.Usuario.UserName = order.Usuario.UserName
 
 	return orderDto, nil
 }
@@ -58,10 +53,11 @@ func (s *orderService) GetOrders() (dto.OrdersDto, e.ApiError) {
 	for _, order := range orders {
 		var orderDto dto.OrderDto
 
-		orderDto.IdOrder = order.Id
-		orderDto.Estado = order.Estado
+		orderDto.Id = order.Id
+		//orderDto.Estado = order.Estado
 		orderDto.Fecha = order.Fecha
 		orderDto.MontoFinal = order.MontoFinal
+		orderDto.IdUsuario = order.IdUser
 		//orderDto.OrderDetail = order.OrderDetail ---------
 		//orderDto.Usuario = order.Usuario -----------------manejar
 
@@ -75,15 +71,16 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 	var order model.Order
 
-	order.Estado = orderDto.Estado
+	//	order.Estado = orderDto.Estado
 	order.Fecha = orderDto.Fecha
 	order.MontoFinal = orderDto.MontoFinal
+	order.IdUser = orderDto.IdUsuario
 	//order.OrderDetail = orderDto.OrderDetail  --------- creo que no va
 	// order.Usuario = orderDto.Usuario -----------------manejar
 
 	order = orderCliente.InsertOrder(order)
 
-	order.Id = orderDto.IdOrder
+	order.Id = orderDto.Id
 
 	return orderDto, nil
 }

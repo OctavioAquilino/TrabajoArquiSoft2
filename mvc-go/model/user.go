@@ -7,6 +7,7 @@ type User struct {
 	LastName string `gorm:"type:varchar(250);not null"`
 	UserName string `gorm:"type:varchar(150);not null"` //unique: no se puede repetir y no es PK
 	Password string `gorm:"type:varchar(150);not null"` //deberia estar encriptado
+	Phone    int    `gorm:"type:integer;not null"`
 }
 
 type Users []User

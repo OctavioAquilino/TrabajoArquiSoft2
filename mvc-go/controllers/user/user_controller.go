@@ -40,27 +40,6 @@ func GetUsers(c *gin.Context) {
 	c.JSON(http.StatusOK, usersDto)
 }
 
-func UserInsert(c *gin.Context) {
-	var userDto dto.UserDto
-	err := c.BindJSON(&userDto) //marshall, convierte de json a userDto
-
-	// Error Parsing json param
-	if err != nil {
-		log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, err.Error())
-		return
-	}
-
-	userDto, er := service.UserService.InsertUser(userDto) //delega, simpre envia dto
-	// Error del Insert
-	if er != nil {
-		c.JSON(er.Status(), er)
-		return
-	}
-
-	c.JSON(http.StatusCreated, userDto)
-}
-
 //PARTE DE AUTENTICACION JWT
 
 var jwtKey = []byte("secret_key")

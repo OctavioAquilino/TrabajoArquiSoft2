@@ -28,17 +28,6 @@ func GetUsers() model.Users {
 	return users
 }
 
-func InsertUser(user model.User) model.User {
-	result := Db.Create(&user)
-
-	if result.Error != nil {
-		//TODO Manage Errors
-		log.Error("")
-	}
-	log.Debug("User Created: ", user.Id)
-	return user
-}
-
 func GetUserByUserName(userName string) model.User {
 	var user model.User
 

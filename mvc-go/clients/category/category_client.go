@@ -27,14 +27,3 @@ func GetCategories() model.Categories {
 
 	return categories
 }
-
-func InsertCategory(category model.Category) model.Category {
-	result := Db.Create(&category)
-
-	if result.Error != nil {
-		//TODO Manage Errors
-		log.Error("")
-	}
-	log.Debug("Category Created: ", category.Id)
-	return category
-}

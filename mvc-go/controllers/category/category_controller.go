@@ -37,24 +37,3 @@ func GetCategories(c *gin.Context) {
 
 	c.JSON(http.StatusOK, categoriesDto)
 }
-
-func CategoryInsert(c *gin.Context) {
-	var categoryDto dto.CategoryDto
-	err := c.BindJSON(&categoryDto) //marshall, convierte de json a categoryDto
-
-	// Error Parsing json param
-	if err != nil {
-		log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, err.Error())
-		return
-	}
-
-	categoryDto, er := service.CategoryService.InsertCategory(categoryDto) //delega, simpre envia dto
-	// Error del Insert
-	if er != nil {
-		c.JSON(er.Status(), er)
-		return
-	}
-
-	c.JSON(http.StatusCreated, categoryDto)
-}

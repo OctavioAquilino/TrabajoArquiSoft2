@@ -15,8 +15,6 @@ type addressServiceInterface interface {
 	//siempre devuelve dto o error
 	GetAddressById(id int) (dto.AddressDto, e.ApiError)
 	GetAddresses() (dto.AddressesDto, e.ApiError)
-	InsertAddress(addressDto dto.AddressDto) (dto.AddressDto, e.ApiError)
-	//LoginAddress(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
 }
 
 var (
@@ -59,21 +57,4 @@ func (s *addressService) GetAddresses() (dto.AddressesDto, e.ApiError) {
 	}
 
 	return addressesDto, nil
-}
-
-func (s *addressService) InsertAddress(addressDto dto.AddressDto) (dto.AddressDto, e.ApiError) {
-
-	var address model.Address
-
-	//	addressDto.Id = address.Id
-	address.Number = addressDto.Number
-	address.Neighborhood = addressDto.Neighborhood
-	address.Street = addressDto.Street
-	address.City = addressDto.City
-
-	address = addressCliente.InsertAddress(address)
-
-	addressDto.Id = address.Id
-
-	return addressDto, nil
 }
