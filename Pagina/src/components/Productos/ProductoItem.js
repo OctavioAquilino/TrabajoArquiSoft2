@@ -1,18 +1,27 @@
 import React from "react";
 import Logo from "../../Imagenes/Logo1.png";
 
-export const ProductoItem =()=>{
+export const ProductoItem =(
+    {id,
+    title,
+    price,
+    image,
+    category,
+    img1,
+    img2,
+    cantidad
+})=>{
     return(
         <div className="producto">
         <a href="#">
         <div className="producto_img">
-        <img src={Logo} alt="logo"/>
+        <img src={image} alt={title}/>
         </div>
         </a>
         <div className="producto_footer">
-            <h1>Title</h1>
-            <p>Categoria</p>
-            <p className="price">$120</p>
+            <h1>{title}</h1>
+            <p>{category}</p>
+            <p className="price">${price}</p>
         </div>
         <div className="buttom">
             <button className="btn">
