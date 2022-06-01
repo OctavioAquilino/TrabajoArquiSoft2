@@ -17,6 +17,7 @@ type orderServiceInterface interface {
 	GetOrderById(id int) (dto.OrderDto, e.ApiError)
 	GetOrders() (dto.OrdersDto, e.ApiError)
 	InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiError)
+	GetOrdersByIdUser(idUser int) (dto.OrdersResponseDto, e.ApiError)
 }
 
 var (
@@ -83,4 +84,28 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 	order.Id = orderDto.Id
 
 	return orderDto, nil
+}
+
+//Buscar orden por IDuser
+
+func (s *orderService) GetOrdersByIdUser(idUser int) (dto.OrdersResponseDto, e.ApiError) {
+
+	var orders model.Orders = orderCliente.GetOrdersByIdUser(idUser) //objeto de la DB, a traves del DAO
+	var ordersResponseDto dto.OrdersResponseDto
+
+	/*
+		if (size(orders) == 0) {
+			return orderResponseDto, e.NewBadRequestApiError("order not found")
+		}*/
+	for _, order := range orders {
+		var orderResponseDto dto.OrderResponseDto
+
+		orderResponseDto.Id = order.Id
+		orderResponseDto.Fecha = order.Fecha
+		orderResponseDto.MontoFinal = order.MontoFinal
+
+		ordersResponseDto = append(ordersResponseDto, orderResponseDto)
+	}
+
+	return ordersResponseDto, nil
 }

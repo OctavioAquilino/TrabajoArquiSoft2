@@ -38,3 +38,14 @@ func InsertOrder(order model.Order) model.Order {
 	log.Debug("Order Created: ", order.Id)
 	return order
 }
+
+//busuqueda por idUser
+func GetOrdersByIdUser(idUser int) model.Orders {
+	var orders model.Orders
+
+	log.Debug("idUser: ", idUser)
+	Db.Where("id_user = ?", idUser).Find(&orders) //traduccion y seteo en order
+	log.Debug("Order: ", orders)
+
+	return orders
+}
