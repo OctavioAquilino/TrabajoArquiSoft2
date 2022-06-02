@@ -8,6 +8,7 @@ type ProductDto struct {
 	Id          int     `json:"id"`
 	IdCategory  int     `json:"id_category"`
 	Description string  `json:"description"`
+	Stock       int     `json:"stock"`
 }
 
 type ProductsDto []ProductDto
