@@ -7,6 +7,7 @@ import (
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
+	"time"
 	//"mvc-go/utils/modeladto"
 )
 
@@ -72,16 +73,13 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 	var order model.Order
 
-	//	order.Estado = orderDto.Estado
-	order.Fecha = orderDto.Fecha
+	order.Fecha = time.Now()
 	order.MontoFinal = orderDto.MontoFinal
 	order.IdUser = orderDto.IdUsuario
-	//order.OrderDetail = orderDto.OrderDetail  --------- creo que no va
-	// order.Usuario = orderDto.Usuario -----------------manejar
 
 	order = orderCliente.InsertOrder(order)
 
-	order.Id = orderDto.Id
+	orderDto.Id = order.Id
 
 	return orderDto, nil
 }

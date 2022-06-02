@@ -74,14 +74,13 @@ func (s *orderDetailService) InsertOrderDetail(orderDetailDto dto.OrderDetailDto
 	orderDetail.Detalle = orderDetailDto.Detalle
 	orderDetail.Cantidad = orderDetailDto.Cantidad
 	orderDetail.PrecioUnitario = orderDetailDto.PrecioUnitario
-	orderDetail.Total = orderDetailDto.Total
+	orderDetail.Total = orderDetailDto.PrecioUnitario * orderDetailDto.Cantidad
 	orderDetail.IdOrder = orderDetailDto.IdOrder
 	orderDetail.IdProduct = orderDetailDto.IdProducto
-	//orderDetail.Producto = orderDetailDto.Producto  ----------------Manejar
 
 	orderDetail = orderDetailCliente.InsertOrderDetail(orderDetail)
 
-	orderDetail.Id = orderDetailDto.Id
+	orderDetailDto.Id = orderDetail.Id
 
 	return orderDetailDto, nil
 }
