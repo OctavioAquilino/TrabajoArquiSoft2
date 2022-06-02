@@ -38,3 +38,12 @@ func InsertOrderDetail(orderDetail model.OrderDetail) model.OrderDetail {
 	log.Debug("OrderDetail Created: ", orderDetail.Id)
 	return orderDetail
 }
+
+func GetOrderDetailByIdOrder(idOrder int) model.OrderDetails {
+	var ordersDetail model.OrderDetails
+
+	Db.Where("id_order = ?", idOrder).Find(&ordersDetail) //traduccion y seteo en orderDetail
+	log.Debug("OrderDetail: ", ordersDetail)
+
+	return ordersDetail
+}

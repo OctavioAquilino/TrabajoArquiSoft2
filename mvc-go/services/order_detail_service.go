@@ -16,6 +16,7 @@ type orderDetailServiceInterface interface {
 	GetOrderDetailById(id int) (dto.OrderDetailDto, e.ApiError)
 	GetOrderDetails() (dto.OrderDetailsDto, e.ApiError)
 	InsertOrderDetail(orderDetailDto dto.OrderDetailDto) (dto.OrderDetailDto, e.ApiError)
+	GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsResDto, e.ApiError)
 }
 
 var (
@@ -83,4 +84,26 @@ func (s *orderDetailService) InsertOrderDetail(orderDetailDto dto.OrderDetailDto
 	orderDetailDto.Id = orderDetail.Id
 
 	return orderDetailDto, nil
+}
+
+func (s *orderDetailService) GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsResDto, e.ApiError) {
+
+	var ordersDetail model.OrderDetails = orderDetailCliente.GetOrderDetailByIdOrder(idOrder) //objeto de la DB, a traves del DAO
+	var ordersDetailResDto dto.OrderDetailsResDto
+	/*
+		if orderDetailRes.Id == 0 {
+			return orderDetailDto, e.NewBadRequestApiError("orderDetail not found")
+		}*/
+	for _, orderDetailRes := range ordersDetail {
+		var orderDetailResDto dto.OrderDetailResDto
+		orderDetailResDto.Id = orderDetailRes.Id
+		orderDetailResDto.Detalle = orderDetailRes.Detalle
+		orderDetailResDto.Cantidad = orderDetailRes.Cantidad
+		orderDetailResDto.PrecioUnitario = orderDetailRes.PrecioUnitario
+		orderDetailResDto.Total = orderDetailRes.Total
+		orderDetailResDto.IdProducto = orderDetailRes.IdProduct
+
+		ordersDetailResDto = append(ordersDetailResDto, orderDetailResDto)
+	}
+	return ordersDetailResDto, nil
 }
