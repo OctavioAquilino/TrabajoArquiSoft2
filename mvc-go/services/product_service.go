@@ -34,7 +34,11 @@ func (s *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 		return productDto, e.NewBadRequestApiError("product not found")
 	}
 	productDto.Name = product.Name
+	productDto.Price = product.Price
 	productDto.Id = product.Id
+	productDto.Description = product.Description
+	productDto.Stock = product.Stock
+	productDto.IdCategory = product.IdCategory
 	return productDto, nil
 }
 
