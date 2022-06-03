@@ -38,6 +38,7 @@ func (s *addressService) GetAddressById(id int) (dto.AddressDto, e.ApiError) {
 	addressDto.Neighborhood = address.Neighborhood
 	addressDto.Street = address.Street
 	addressDto.City = address.City
+	addressDto.IdUser = address.IdUser
 	return addressDto, nil
 }
 
@@ -53,6 +54,7 @@ func (s *addressService) GetAddresses() (dto.AddressesDto, e.ApiError) {
 		addressDto.Neighborhood = address.Neighborhood
 		addressDto.Street = address.Street
 		addressDto.City = address.City
+		addressDto.IdUser = address.IdUser
 		addressesDto = append(addressesDto, addressDto)
 	}
 
