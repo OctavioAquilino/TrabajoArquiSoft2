@@ -40,6 +40,8 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 	userDto.Name = user.Name
 	userDto.LastName = user.LastName
 	userDto.UserName = user.UserName
+	userDto.Password = user.Password
+	userDto.Phone = user.Phone
 	userDto.Id = user.Id
 	return userDto, nil
 }
@@ -54,6 +56,8 @@ func (s *userService) GetUsers() (dto.UsersDto, e.ApiError) {
 		userDto.Name = user.Name
 		userDto.LastName = user.LastName
 		userDto.UserName = user.Name
+		userDto.Password = user.Password
+		userDto.Phone = user.Phone
 		userDto.Id = user.Id
 
 		usersDto = append(usersDto, userDto)
@@ -62,20 +66,7 @@ func (s *userService) GetUsers() (dto.UsersDto, e.ApiError) {
 	return usersDto, nil
 }
 
-func (s *userService) InsertUser(userDto dto.UserDto) (dto.UserDto, e.ApiError) {
-
-	var user model.User
-
-	user.Name = userDto.Name
-	user.LastName = userDto.LastName
-	user.UserName = userDto.UserName
-	user.Password = userDto.Password
-
-	userDto.Id = user.Id
-
-	return userDto, nil
-}
-
+//LOGIN
 var jwtKey = []byte("secret_key")
 
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {

@@ -34,8 +34,8 @@ func (s *categoryService) GetCategoryById(id int) (dto.CategoryDto, e.ApiError) 
 		return categoryDto, e.NewBadRequestApiError("category not found")
 	}
 	categoryDto.Descripcion = category.Description
-	//	categoryDto.IdCategory = category.Id
 	categoryDto.Nombre = category.Name
+	categoryDto.IdCategory = category.Id
 	return categoryDto, nil
 }
 
