@@ -1,20 +1,18 @@
 import React,{ createContext, useState, useEffect} from "react";
-import Data from '../Data.js';
+
 export const DataContext = createContext();
 
-export const Dataprovider = (props)=>{
-    const[productos,setProductos]= useState([])
+export const Dataprovider= (props)=>{
 
-    useEffect(() =>{
-        const producto =Data.items
-        if(producto){
-            setProductos(producto)
-        }else{
-            setProductos([])
-        }
-        
+    const [productos,setProductos] = useState([]);
+    const fetchApi = async()=>{
+    const response = await fetch('http://localhost:8090/product')
+    .then((response) => response.json());
+    setProductos(response);
+    };
+    useEffect(()=>{
+    fetchApi();
     },[])
-
     const value = {
         productos:[productos]
     }

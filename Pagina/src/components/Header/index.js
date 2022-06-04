@@ -1,6 +1,7 @@
 import React from "react"
 import Logo from "../../Imagenes/Logo1.png"
 import {Link} from "react-router-dom";
+
 export const Header = ()=>{
     return(
         <header>
@@ -17,7 +18,7 @@ export const Header = ()=>{
                <Link to="/productos"> PRODUCTOS</Link> 
             </li>
         </ul>
-        <div className="carrito">
+        <div className="cart">
             <box-icon name='cart'></box-icon>
             <span className="item_total">0</span>
         </div>

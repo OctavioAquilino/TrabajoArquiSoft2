@@ -1,7 +1,7 @@
 import React from "react"
 import {Routes, Route} from "react-router-dom";
 import {Inicio} from "./Inicio";
-import{ProductosLista} from "./Productos/index";
+import {ProductosLista} from "./Productos/index";
 
 export const Paginas = ()=>{
     return(

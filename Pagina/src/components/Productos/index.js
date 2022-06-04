@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-//import Logo from "../../Imagenes/Logo1.png";
 import { DataContext } from "../../context/Dataprovider";
 import { ProductoItem } from "./ProductoItem";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export const ProductosLista = ()=>{
 
@@ -12,18 +12,16 @@ export const ProductosLista = ()=>{
     return(
         <>
         <h1 className="title"> PRODUCTOS</h1>
+        
         <div className="productos">
             {
                 productos.map(producto =>(
                   <ProductoItem key={producto.id}
                   id={producto.id}
-                  title={producto.title}
-                  price={producto.price}
-                  image={producto.image}
-                  category={producto.category}
-                  img1={producto.img1}
-                  img2={producto.img2}
-                  cantidad={producto.cantidad}
+                  name={producto.name}
+                  base_price={producto.base_price}
+                  stock={producto.stock}
+                  description={producto.description}
                   />  
                 ))
             }
