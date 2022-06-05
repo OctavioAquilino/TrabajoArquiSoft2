@@ -53,3 +53,29 @@ func GetProductsByIdCategory(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, productsDto)
 }
+
+//Productos por TEXTO
+func GetProductsByText(c *gin.Context) {
+
+	/*
+		log.Debug("Text looking: " + c.Param("texto"))
+		var texto string = c.Param("texto")
+	*/
+	var texto string
+	err1 := c.BindJSON(&texto)
+	if err1 != nil {
+		log.Error(err1.Error())
+		c.JSON(http.StatusBadRequest, err1.Error())
+		return
+	}
+
+	var productsDto dto.ProductsDto
+
+	productsDto, err := service.ProductService.GetProductsByText(texto) //delega el trabajo al service
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+	c.JSON(http.StatusOK, productsDto)
+}

@@ -36,3 +36,12 @@ func GetProductsByIdCategory(idCategory int) model.Products {
 
 	return products
 }
+
+func GetProductsByText(texto string) model.Products {
+	var products model.Products
+
+	Db.Where("name LIKE ?", "%"+texto+"%").Find(&products)
+	log.Debug("Product: ", products)
+
+	return products
+}
