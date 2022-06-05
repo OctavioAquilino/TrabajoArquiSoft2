@@ -82,6 +82,7 @@ func (s *orderDetailService) InsertOrderDetail(orderDetailDto dto.OrderDetailDto
 	orderDetail = orderDetailCliente.InsertOrderDetail(orderDetail)
 
 	orderDetailDto.Id = orderDetail.Id
+	orderDetailDto.Total = orderDetail.Total
 
 	return orderDetailDto, nil
 }

@@ -37,6 +37,13 @@ func InsertOrderDetail(orderDetail model.OrderDetail) model.OrderDetail {
 	}
 	//result1 := Db.UpdateColumn()
 	log.Debug("OrderDetail Created: ", orderDetail.Id)
+	result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.IdProduct).Update("stock", gorm.Expr("stock - ? ", orderDetail.Cantidad))
+
+	if result1.Error != nil {
+		//TODO Manage Errors
+		log.Error("Pdto no encontrado")
+	}
+
 	return orderDetail
 }
 
