@@ -28,11 +28,11 @@ func GetUsers() model.Users {
 	return users
 }
 
-func GetUserByUserName(userName string) model.User {
+func GetUserByUserName(userName string, password string) model.User {
 	var user model.User
 
-	Db.Where("user_name = ?", userName).First(&user) //traduccion y seteo en user
-	//	log.Debug("User: ", user)
+	Db.Where("user_name = ? AND password = ?", userName, password).First(&user) //traduccion y seteo en user
+	log.Debug("User: ", user)
 
 	return user
 }

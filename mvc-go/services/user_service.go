@@ -9,6 +9,7 @@ import (
 	e "mvc-go/utils/errors"
 
 	"github.com/dgrijalva/jwt-go"
+	log "github.com/sirupsen/logrus"
 )
 
 type userService struct{}
@@ -17,7 +18,6 @@ type userServiceInterface interface {
 	//siempre devuelve dto o error
 	GetUserById(id int) (dto.UserDto, e.ApiError)
 	GetUsers() (dto.UsersDto, e.ApiError)
-
 	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
 }
 
@@ -71,7 +71,8 @@ var jwtKey = []byte("secret_key")
 
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
 	//var user model.User
-	var user model.User = userCliente.GetUserByUserName(loginDto.UserName) //objeto de la DB, a traves del DAO
+	log.Debug(loginDto)
+	var user model.User = userCliente.GetUserByUserName(loginDto.UserName, loginDto.Password) //objeto de la DB, a traves del DAO
 	//var userDto dto.UserDto
 	var tokenDto dto.TokenDto
 

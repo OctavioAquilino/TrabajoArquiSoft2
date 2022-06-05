@@ -54,7 +54,7 @@ header ul{
   margin: 0;
 }
 header ul li{
-  padding: 0 1rem;
+  padding: 0 5rem;
 }
 header ul li a{
   font-weight: bold;
@@ -63,14 +63,14 @@ header .cart{
   position: relative;
   cursor: pointer;
 }
-header .cart box-icon{
-width: 60px;
-height: 60px;
+header .cart box-icon{ 
+  width: 70px;
+  height: 60px;
 }
 header .cart span{
   position: absolute;
   top: -1rem;
-  right: -1.5rem;
+  right: 0rem;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -96,7 +96,7 @@ header .cart span{
   color: blue;
   text-align: center;
 }
-.productos{
+.productos {
   padding: 2rem 1rem;
   margin: 0 auto;
   display: grid;
@@ -104,6 +104,7 @@ header .cart span{
   gap: 3rem 2rem;
   box-sizing: border-box;
 }
+
 .producto{
   display: flex;
   width: 100%;
@@ -192,3 +193,45 @@ header .cart span{
 .inicio img{
   width: 100%;
 }
+/*---CATEGORIAS---*/
+.categorias{
+    padding: 2rem 10rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(22rem, 1fr));
+    gap: 3rem 15rem;
+    box-sizing: border-box;
+  }
+  
+  .categoria{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 10px 10px 2px rgba(6, 0, 0, 0.2);
+    border: 6px solid transparent;
+    border-radius: 50px;
+  }
+  .categoria:hover{
+    border: 6px solid rgb(50, 146, 178);
+  }
+  .categoria_img img{
+    width: 200px;
+  }
+  .categoria_footer{
+    padding: 3rem;
+  }
+  .categoria_footer h1{
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .categoria_footer p{
+    text-align: center;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.55);
+    text-transform: uppercase;
+    font-size: 18px;
+  }

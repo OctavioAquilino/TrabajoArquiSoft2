@@ -17,6 +17,9 @@ export const Header = ()=>{
             <li>
                <Link to="/productos"> PRODUCTOS</Link> 
             </li>
+            <li>
+               <Link to="/login"> LOG IN</Link> 
+            </li>
         </ul>
         <div className="cart">
             <box-icon name='cart'></box-icon>

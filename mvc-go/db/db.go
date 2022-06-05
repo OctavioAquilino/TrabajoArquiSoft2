@@ -22,9 +22,9 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "trabajoarqui"
+	DBName := "prueba2"
 	DBUser := "root"
-	DBPass := "root"
+	DBPass := ""
 	//DBPass := os.Getenv("MVC_DB_PASS")
 	DBHost := "127.0.0.1" //127001
 	// ------------------------

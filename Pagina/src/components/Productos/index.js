@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
-import { DataContext } from "../../context/Dataprovider";
+import React, { useContext, useEffect, useState} from "react";
 import { ProductoItem } from "./ProductoItem";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export const ProductosLista = ()=>{
 
-    const value = useContext(DataContext)
-    const [productos] = value.productos
-    console.log(productos)
+    const [productos,setProductos] = useState([]);
+    const fetchApi = async()=>{
+    const response = await fetch('http://localhost:8090/product')
+    .then((response) => response.json());
+    setProductos(response);
+    };
+    useEffect(()=>{
+    fetchApi();
+    },[])
 
     return(
         <>
