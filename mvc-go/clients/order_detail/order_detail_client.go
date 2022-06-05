@@ -35,6 +35,7 @@ func InsertOrderDetail(orderDetail model.OrderDetail) model.OrderDetail {
 		//TODO Manage Errors
 		log.Error("")
 	}
+	//result1 := Db.UpdateColumn()
 	log.Debug("OrderDetail Created: ", orderDetail.Id)
 	return orderDetail
 }
