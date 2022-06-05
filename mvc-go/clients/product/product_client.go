@@ -27,3 +27,12 @@ func GetProducts() model.Products {
 
 	return products
 }
+
+func GetProductsByIdCategory(idCategory int) model.Products {
+	var products model.Products
+
+	Db.Where("id_category = ?", idCategory).Find(&products) //traduccion y seteo en product
+	log.Debug("Product: ", products)
+
+	return products
+}

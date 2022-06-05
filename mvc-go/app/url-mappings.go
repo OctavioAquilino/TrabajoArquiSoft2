@@ -22,6 +22,9 @@ func mapUrls() {
 	router.GET("/product/:id", productController.GetProductById)
 	router.GET("/product", productController.GetProducts)
 
+	//filtros
+	router.GET("/productCategory/:idCategory", productController.GetProductsByIdCategory)
+
 	//Address Mapping
 	router.GET("/address/:id", addressController.GetAddressById)
 	router.GET("/address", addressController.GetAddresses)
