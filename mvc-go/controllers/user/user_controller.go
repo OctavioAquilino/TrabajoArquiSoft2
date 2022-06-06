@@ -47,7 +47,7 @@ var jwtKey = []byte("secret_key")
 func UserLogin(c *gin.Context) {
 	var loginDto dto.LoginDto
 	err := c.BindJSON(&loginDto)
-	log.Debug(loginDto)
+	log.Debug(loginDto, "tetas")
 	if err != nil {
 		log.Error(err.Error())
 		c.JSON(http.StatusBadRequest, err.Error())
@@ -67,7 +67,6 @@ func UserLogin(c *gin.Context) {
 		return
 	}*/
 	tkn, err := jwt.Parse(tokenDto.Token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
-
 	if err != nil {
 		if err == jwt.ErrSignatureInvalid {
 			c.JSON(http.StatusUnauthorized, "Invalid Signature")

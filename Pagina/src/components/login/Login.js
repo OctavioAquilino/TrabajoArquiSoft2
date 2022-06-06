@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import './Prueba1.css';
 import {Link} from "react-router-dom";
+import { faBorderStyle } from "@fortawesome/free-solid-svg-icons";
 
-async function getUserByID(id) {
- return fetch('http://127.0.0.1:8090/user/' + id, {
+async function getUserByID(username,userpass) {
+  alert(username)
+ return fetch('http://127.0.0.1:8090/login' , {
    method: 'GET',
    headers: {
      'Content-Type': 'application/json'
-   }
+   },
+   body: JSON.stringify({username:"user_name" , userpass:"password"}),
+   
  })
+ //.then((response) => response.json())
    .then(data => data.json())
 }
 
@@ -24,18 +29,15 @@ export function Login() {
 
     // Obtenemos Textos
     var {uid, upass}  = document.forms[0];
-
-    alert(upass.value);
+    alert(upass.value)
     // Find user login info
-    const user = await getUserByID(uid.value);
-    
-    
+    const user = await getUserByID(uid.value,upass.value);
+
+
     setUserData(user);
     setIsUSer(true);
-    
-  };
 
-  
+  };
   const renderForm = (
     <div className="form">
       <div className="title">INGRESA TU CUENTA</div>
@@ -53,14 +55,16 @@ export function Login() {
     </div>
   );
 
-  const Accept = (
+  /*const Accept = (
       <Link to="/"> INICIO</Link> 
+      <h1> {userData.name}</h1>
   )
-
+*/
   return (
-    <div className="app2">
+    <div className="app">
       <div className="login-form">
-          {isUser? Accept : renderForm}
+        <div className="title">Pruebas Arq. Soft. {userData.name}</div>
+          {isUser? <div>Usuario: {userData.name},{userData.user_name} </div> : renderForm}
       </div>
     </div>
   );
