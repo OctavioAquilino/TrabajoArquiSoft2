@@ -55,3 +55,26 @@ func GetOrderDetailByIdOrder(idOrder int) model.OrderDetails {
 
 	return ordersDetail
 }
+
+func InsertOrdersDetail(ordersDetail model.OrderDetails) model.OrderDetails {
+
+	for _, orderDetail := range ordersDetail {
+
+		result := Db.Create(&orderDetail)
+
+		if result.Error != nil {
+			//TODO Manage Errors
+			log.Error("")
+		}
+		//result1 := Db.UpdateColumn()
+		log.Debug("OrderDetail Created: ", orderDetail.Id)
+		result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.IdProduct).Update("stock", gorm.Expr("stock - ? ", orderDetail.Cantidad))
+
+		if result1.Error != nil {
+			//TODO Manage Errors
+			log.Error("Pdto no encontrado")
+		}
+	}
+
+	return ordersDetail
+}

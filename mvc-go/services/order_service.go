@@ -3,7 +3,9 @@ package services
 //lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
 //Se puede reutilizar
 import (
+	_ "fmt"
 	orderCliente "mvc-go/clients/order" //DAO
+	orderDetailCliente "mvc-go/clients/order_detail"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -41,6 +43,7 @@ func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 	orderDto.Fecha = order.Fecha
 	orderDto.MontoFinal = order.MontoFinal
 	orderDto.IdUsuario = order.IdUser
+
 	//orderDto.OrderDetail = order.OrderDetail --------- creo que no va
 	//orderDto.Usuario = order.Usuario
 
@@ -81,7 +84,45 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 	orderDto.Id = order.Id
 
-	return orderDto, nil
+	var ordersDetail model.OrderDetails
+	for _, orderDetailDto := range orderDto.OrdersDetail {
+		var orderDetail model.OrderDetail
+		orderDetail.Detalle = orderDetailDto.Detalle
+		orderDetail.Cantidad = orderDetailDto.Cantidad
+		orderDetail.PrecioUnitario = orderDetailDto.PrecioUnitario
+		orderDetail.Total = orderDetailDto.PrecioUnitario * orderDetailDto.Cantidad
+
+		orderDetail.IdProduct = orderDetailDto.IdProducto
+
+		orderDetail.IdOrder = orderDto.Id
+		//orderDetail = orderDetailCliente.InsertOrderDetail(orderDetail)
+		ordersDetail = append(ordersDetail, orderDetail)
+	}
+
+	ordersDetail = orderDetailCliente.InsertOrdersDetail(ordersDetail)
+	// cargado de la order response
+
+	var orderResponseDto dto.OrderDto
+
+	orderResponseDto.Fecha = order.Fecha
+	orderResponseDto.Id = order.Id
+	orderResponseDto.IdUsuario = order.IdUser
+	orderResponseDto.MontoFinal = order.MontoFinal
+
+	for _, orderDetail := range ordersDetail {
+		var orderDetailDto dto.OrderDetailDto
+		//fmt.Println("------", orderDetail.Id)
+		orderDetailDto.Id = orderDetail.Id
+		orderDetailDto.Cantidad = orderDetail.Cantidad
+		orderDetailDto.IdProducto = orderDetail.IdProduct
+		orderDetailDto.PrecioUnitario = orderDetail.PrecioUnitario
+		orderDetailDto.Total = orderDetail.Total
+		orderDetailDto.IdOrder = orderDetail.IdOrder
+
+		orderResponseDto.OrdersDetail = append(orderResponseDto.OrdersDetail, orderDetailDto)
+	}
+
+	return orderResponseDto, nil
 }
 
 //Buscar orden por IDuser

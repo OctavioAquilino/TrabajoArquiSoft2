@@ -9,8 +9,8 @@ type OrderDto struct {
 	MontoFinal float32   `json:"monto_final"`
 	Fecha      time.Time `json:"fecha"`
 	//Estado     string  `json:"estado"`
-	IdUsuario int `json:"id_user"`
-	//OrderDetail OrderDetailDto `json:"OrderDetalle"`
+	IdUsuario    int             `json:"id_user"`
+	OrdersDetail OrderDetailsDto `json:"OrdersDetalle"`
 }
 
 type OrdersDto []OrderDto
