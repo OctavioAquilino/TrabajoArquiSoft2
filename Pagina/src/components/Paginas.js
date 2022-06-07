@@ -1,7 +1,7 @@
 import React from "react"
 import {Routes, Route} from "react-router-dom";
 import {ProductosLista} from "./Productos/index";
-import { Login } from "./login/Login";
+import Login from "./login/Login.tsx";
 import {CategoryLista} from "./Inicio/index"
 import './Inicio/inicio.css';
 export const Paginas = ()=>{
