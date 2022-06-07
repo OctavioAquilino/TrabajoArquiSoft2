@@ -41,8 +41,8 @@ func (s *orderDetailService) GetOrderDetailById(id int) (dto.OrderDetailDto, e.A
 	orderDetailDto.PrecioUnitario = orderDetail.PrecioUnitario
 	orderDetailDto.Total = orderDetail.Total
 	orderDetailDto.IdOrder = orderDetail.IdOrder
-	//orderDetailDto.IdProducto = orderDetail.IdProduct
-	//orderDetailDto.Producto = orderDetail.Producto ----------------Manejar
+	orderDetailDto.IdProducto = orderDetail.IdProduct
+
 	return orderDetailDto, nil
 }
 
@@ -59,8 +59,7 @@ func (s *orderDetailService) GetOrderDetails() (dto.OrderDetailsDto, e.ApiError)
 		orderDetailDto.PrecioUnitario = orderDetail.PrecioUnitario
 		orderDetailDto.Total = orderDetail.Total
 		orderDetailDto.IdOrder = orderDetail.IdOrder
-		//orderDetailDto.IdProducto = orderDetail.IdProduct
-		//orderDetailDto.Producto = orderDetail.Producto ----------------Manejar
+		orderDetailDto.IdProducto = orderDetail.IdProduct
 
 		orderDetailsDto = append(orderDetailsDto, orderDetailDto)
 	}
@@ -77,7 +76,7 @@ func (s *orderDetailService) InsertOrderDetail(orderDetailDto dto.OrderDetailDto
 	orderDetail.PrecioUnitario = orderDetailDto.PrecioUnitario
 	orderDetail.Total = orderDetailDto.PrecioUnitario * orderDetailDto.Cantidad
 	orderDetail.IdOrder = orderDetailDto.IdOrder
-	//orderDetail.IdProduct = orderDetailDto.IdProducto
+	orderDetail.IdProduct = orderDetailDto.IdProducto
 
 	orderDetail = orderDetailCliente.InsertOrderDetail(orderDetail)
 
@@ -102,7 +101,7 @@ func (s *orderDetailService) GetOrderDetailByIdOrder(idOrder int) (dto.OrderDeta
 		orderDetailResDto.Cantidad = orderDetailRes.Cantidad
 		orderDetailResDto.PrecioUnitario = orderDetailRes.PrecioUnitario
 		orderDetailResDto.Total = orderDetailRes.Total
-		//orderDetailResDto.IdProducto = orderDetailRes.IdProduct
+		orderDetailResDto.IdProducto = orderDetailRes.IdProduct
 
 		ordersDetailResDto = append(ordersDetailResDto, orderDetailResDto)
 	}

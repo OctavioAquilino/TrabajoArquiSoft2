@@ -44,9 +44,6 @@ func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 	orderDto.MontoFinal = order.MontoFinal
 	orderDto.IdUsuario = order.IdUser
 
-	//orderDto.OrderDetail = order.OrderDetail --------- creo que no va
-	//orderDto.Usuario = order.Usuario
-
 	return orderDto, nil
 }
 
@@ -59,12 +56,10 @@ func (s *orderService) GetOrders() (dto.OrdersDto, e.ApiError) {
 		var orderDto dto.OrderDto
 
 		orderDto.Id = order.Id
-		//orderDto.Estado = order.Estado
+
 		orderDto.Fecha = order.Fecha
 		orderDto.MontoFinal = order.MontoFinal
 		orderDto.IdUsuario = order.IdUser
-		//orderDto.OrderDetail = order.OrderDetail ---------
-		//orderDto.Usuario = order.Usuario -----------------manejar
 
 		ordersDto = append(ordersDto, orderDto)
 	}
@@ -92,10 +87,10 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 		orderDetail.PrecioUnitario = orderDetailDto.PrecioUnitario
 		orderDetail.Total = orderDetailDto.PrecioUnitario * orderDetailDto.Cantidad
 
-		//orderDetail.IdProduct = orderDetailDto.IdProducto
+		orderDetail.IdProduct = orderDetailDto.IdProducto
 
 		orderDetail.IdOrder = orderDto.Id
-		//orderDetail = orderDetailCliente.InsertOrderDetail(orderDetail)
+
 		ordersDetail = append(ordersDetail, orderDetail)
 	}
 
@@ -111,10 +106,10 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 	for _, orderDetail := range ordersDetail {
 		var orderDetailDto dto.OrderDetailDto
-		//fmt.Println("------", orderDetail.Id)
+
 		orderDetailDto.Id = orderDetail.Id
 		orderDetailDto.Cantidad = orderDetail.Cantidad
-		//orderDetailDto.IdProducto = orderDetail.IdProduct
+		orderDetailDto.IdProducto = orderDetail.IdProduct
 		orderDetailDto.PrecioUnitario = orderDetail.PrecioUnitario
 		orderDetailDto.Total = orderDetail.Total
 		orderDetailDto.IdOrder = orderDetail.IdOrder
