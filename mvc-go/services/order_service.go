@@ -87,12 +87,12 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 	var ordersDetail model.OrderDetails
 	for _, orderDetailDto := range orderDto.OrdersDetail {
 		var orderDetail model.OrderDetail
-		orderDetail.Detalle = orderDetailDto.Detalle
+		orderDetail.Nombre = orderDetailDto.Nombre
 		orderDetail.Cantidad = orderDetailDto.Cantidad
 		orderDetail.PrecioUnitario = orderDetailDto.PrecioUnitario
 		orderDetail.Total = orderDetailDto.PrecioUnitario * orderDetailDto.Cantidad
 
-		orderDetail.IdProduct = orderDetailDto.IdProducto
+		//orderDetail.IdProduct = orderDetailDto.IdProducto
 
 		orderDetail.IdOrder = orderDto.Id
 		//orderDetail = orderDetailCliente.InsertOrderDetail(orderDetail)
@@ -114,10 +114,11 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 		//fmt.Println("------", orderDetail.Id)
 		orderDetailDto.Id = orderDetail.Id
 		orderDetailDto.Cantidad = orderDetail.Cantidad
-		orderDetailDto.IdProducto = orderDetail.IdProduct
+		//orderDetailDto.IdProducto = orderDetail.IdProduct
 		orderDetailDto.PrecioUnitario = orderDetail.PrecioUnitario
 		orderDetailDto.Total = orderDetail.Total
 		orderDetailDto.IdOrder = orderDetail.IdOrder
+		orderDetailDto.Nombre = orderDetail.Nombre
 
 		orderResponseDto.OrdersDetail = append(orderResponseDto.OrdersDetail, orderDetailDto)
 	}
