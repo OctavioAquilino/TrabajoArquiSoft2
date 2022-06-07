@@ -6,6 +6,7 @@ import (
 	_ "fmt"
 	orderCliente "mvc-go/clients/order" //DAO
 	orderDetailCliente "mvc-go/clients/order_detail"
+	productCliente "mvc-go/clients/product"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -72,7 +73,7 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 	var order model.Order
 
 	order.Fecha = time.Now()
-	order.MontoFinal = orderDto.MontoFinal
+
 	order.IdUser = orderDto.IdUsuario
 
 	order = orderCliente.InsertOrder(order)
@@ -80,19 +81,27 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 	orderDto.Id = order.Id
 
 	var ordersDetail model.OrderDetails
+	var montofinal float32
 	for _, orderDetailDto := range orderDto.OrdersDetail {
 		var orderDetail model.OrderDetail
-		orderDetail.Nombre = orderDetailDto.Nombre
-		orderDetail.Cantidad = orderDetailDto.Cantidad
-		orderDetail.PrecioUnitario = orderDetailDto.PrecioUnitario
-		orderDetail.Total = orderDetailDto.PrecioUnitario * orderDetailDto.Cantidad
 
 		orderDetail.IdProduct = orderDetailDto.IdProducto
+
+		var product model.Product = productCliente.GetProductById(orderDetail.IdProduct)
+		orderDetail.Nombre = product.Name
+		orderDetail.PrecioUnitario = product.Price
+
+		orderDetail.Cantidad = orderDetailDto.Cantidad
+		orderDetail.Total = orderDetail.PrecioUnitario * orderDetail.Cantidad
+
+		montofinal += orderDetail.Total
 
 		orderDetail.IdOrder = orderDto.Id
 
 		ordersDetail = append(ordersDetail, orderDetail)
 	}
+
+	order.MontoFinal = orderCliente.UpdateMontoFinal(montofinal, order.Id)
 
 	ordersDetail = orderDetailCliente.InsertOrdersDetail(ordersDetail)
 	// cargado de la order response

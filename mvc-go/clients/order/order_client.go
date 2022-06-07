@@ -49,3 +49,13 @@ func GetOrdersByIdUser(idUser int) model.Orders {
 
 	return orders
 }
+
+func UpdateMontoFinal(monto float32, idOrder int) float32 {
+	result := Db.Model(&model.Order{}).Where("id = ?", idOrder).Update("monto_final", monto)
+
+	if result.Error != nil {
+		//TODO Manage Errors
+		log.Error("Order no encontrada")
+	}
+	return monto
+}
