@@ -65,13 +65,13 @@ func GetOrdersByIdUser(c *gin.Context) {
 	log.Debug("Order id to load: " + c.Param("idUser"))
 
 	idUser, _ := strconv.Atoi(c.Param("idUser")) //se pasa el id de array a int
-	var ordersResponseDto dto.OrdersResponseDto
+	var ordersDto dto.OrdersDto
 
-	ordersResponseDto, err := service.OrderService.GetOrdersByIdUser(idUser) //delega el trabajo al service
+	ordersDto, err := service.OrderService.GetOrdersByIdUser(idUser) //delega el trabajo al service
 
 	if err != nil {
 		c.JSON(err.Status(), err)
 		return
 	}
-	c.JSON(http.StatusOK, ordersResponseDto)
+	c.JSON(http.StatusOK, ordersDto)
 }

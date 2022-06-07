@@ -20,7 +20,7 @@ type orderServiceInterface interface {
 	GetOrderById(id int) (dto.OrderDto, e.ApiError)
 	GetOrders() (dto.OrdersDto, e.ApiError)
 	InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiError)
-	GetOrdersByIdUser(idUser int) (dto.OrdersResponseDto, e.ApiError)
+	GetOrdersByIdUser(idUser int) (dto.OrdersDto, e.ApiError)
 }
 
 var (
@@ -123,24 +123,39 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 //Buscar orden por IDuser
 
-func (s *orderService) GetOrdersByIdUser(idUser int) (dto.OrdersResponseDto, e.ApiError) {
+func (s *orderService) GetOrdersByIdUser(idUser int) (dto.OrdersDto, e.ApiError) {
 
 	var orders model.Orders = orderCliente.GetOrdersByIdUser(idUser) //objeto de la DB, a traves del DAO
-	var ordersResponseDto dto.OrdersResponseDto
+	var ordersDto dto.OrdersDto
 
 	/*
 		if (size(orders) == 0) {
 			return orderResponseDto, e.NewBadRequestApiError("order not found")
 		}*/
+
 	for _, order := range orders {
-		var orderResponseDto dto.OrderResponseDto
+		var orderDto dto.OrderDto
 
-		orderResponseDto.Id = order.Id
-		orderResponseDto.Fecha = order.Fecha
-		orderResponseDto.MontoFinal = order.MontoFinal
+		orderDto.Id = order.Id
+		orderDto.Fecha = order.Fecha
+		orderDto.MontoFinal = order.MontoFinal
 
-		ordersResponseDto = append(ordersResponseDto, orderResponseDto)
+		var ordersDetail model.OrderDetails = orderDetailCliente.GetOrderDetailByIdOrder(order.Id)
+		for _, orderDetail := range ordersDetail {
+			var orderDetailDto dto.OrderDetailDto
+
+			orderDetailDto.Id = orderDetail.Id
+			orderDetailDto.Cantidad = orderDetail.Cantidad
+			orderDetailDto.IdProducto = orderDetail.IdProduct
+			orderDetailDto.PrecioUnitario = orderDetail.PrecioUnitario
+			orderDetailDto.Total = orderDetail.Total
+			orderDetailDto.IdOrder = orderDetail.IdOrder
+			orderDetailDto.Nombre = orderDetail.Nombre
+
+			orderDto.OrdersDetail = append(orderDto.OrdersDetail, orderDetailDto)
+		}
+		ordersDto = append(ordersDto, orderDto)
 	}
 
-	return ordersResponseDto, nil
+	return ordersDto, nil
 }
