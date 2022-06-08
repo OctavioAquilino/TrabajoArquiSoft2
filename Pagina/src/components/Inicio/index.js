@@ -21,7 +21,7 @@ async function GetProductByIdCategory(id) {
 function RenderStart(){
     "No hay Productos en la Categoria"    
 }
-/*function RenderProducts(productos){
+/*function RenderProducts(){
 
     <div className="productos">
     {
@@ -38,6 +38,7 @@ function RenderStart(){
             ))
     }
     </div>
+    alert("holaaaa")
 }*/
 /* return if(productos){
     RenderProducts
@@ -47,7 +48,7 @@ function RenderStart(){
 }
 */
 export const CategoryLista =()=>{
-    const Cookie = new Cookies();    
+    //const Cookie = new Cookies();    
     
     const [categorias,setCategorias] = useState([]);
     const fetchApi = async()=>{
@@ -60,11 +61,16 @@ export const CategoryLista =()=>{
     },[])
 
     const [productos,setProductos]=useState([]);
-    function Handle (id_cat) {
-    const response = GetProductByIdCategory(id_cat)
-    setProductos(response);
-    console.log(id_cat);
-        };
+    async function Handle (id) {
+    const response = await GetProductByIdCategory(id)
+    setProductos(response)
+    console.log(response);
+
+    
+    };
+    /*useEffect(() => {
+        Handle();
+    }, [])*/
 
 const Render =(
     <div className="productos">
@@ -81,7 +87,7 @@ const Render =(
               />  
             ))
     }
-    </div>
+    </div> 
 )
 
     return(
