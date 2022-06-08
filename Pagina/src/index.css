@@ -221,11 +221,11 @@ header .cart span{
   width: 100%;
 }
 /*---CATEGORIAS---*/
-.categorias{
+.categorias {
   padding: 2rem 10rem;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(22rem, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(15rem, 1fr));
   gap: 3rem 15rem;
   box-sizing: border-box;
 }
@@ -239,6 +239,16 @@ header .cart span{
   border: 6px solid transparent;
   border-radius: 50px;
 }
+.category{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 10px 10px 2px rgba(6, 0, 0, 0.2);
+  border: 6px solid transparent;
+  border-radius: 50px;
+}
+
 .categoria:hover{
   border: 6px solid rgb(50, 146, 178);
 }
