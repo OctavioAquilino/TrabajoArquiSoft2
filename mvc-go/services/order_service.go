@@ -3,6 +3,7 @@ package services
 //lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
 //Se puede reutilizar
 import (
+	"fmt"
 	_ "fmt"
 	orderCliente "mvc-go/clients/order" //DAO
 	orderDetailCliente "mvc-go/clients/order_detail"
@@ -124,6 +125,7 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 		orderDetailDto.IdOrder = orderDetail.IdOrder
 		orderDetailDto.Nombre = orderDetail.Nombre
 
+		fmt.Println("Id de la orden detalle: ", orderDetail.Id)
 		orderResponseDto.OrdersDetail = append(orderResponseDto.OrdersDetail, orderDetailDto)
 	}
 
