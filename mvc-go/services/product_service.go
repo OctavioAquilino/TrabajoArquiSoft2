@@ -57,6 +57,7 @@ func (s *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 		productDto.Description = product.Description
 		productDto.Stock = product.Stock
 		productDto.IdCategory = product.IdCategory
+		productDto.Picture = product.Picture
 
 		productsDto = append(productsDto, productDto)
 	}
@@ -82,6 +83,7 @@ func (s *productService) GetProductsByIdCategory(idCategory int) (dto.ProductsDt
 		productDto.Description = product.Description
 		productDto.Stock = product.Stock
 		productDto.IdCategory = product.IdCategory
+		productDto.Picture = product.Picture
 
 		productsDto = append(productsDto, productDto)
 	}
@@ -106,6 +108,7 @@ func (s *productService) GetProductsByText(texto string) (dto.ProductsDto, e.Api
 		productDto.Description = product.Description
 		productDto.Stock = product.Stock
 		productDto.IdCategory = product.IdCategory
+		productDto.Picture = product.Picture
 
 		productsDto = append(productsDto, productDto)
 	}

@@ -135,6 +135,8 @@ header .cart span{
 }
 .producto_img img{
   width: 200px;
+  height: 200px;
+  object-fit: contain;
 }
 .producto_footer{
   padding: 0.5rem;
