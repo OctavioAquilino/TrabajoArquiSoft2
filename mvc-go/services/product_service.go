@@ -17,6 +17,7 @@ type productServiceInterface interface {
 	GetProducts() (dto.ProductsDto, e.ApiError)
 	GetProductsByIdCategory(idCategory int) (dto.ProductsDto, e.ApiError)
 	GetProductsByText(texto string) (dto.ProductsDto, e.ApiError)
+	GetRandomProducts(cantidad int) (dto.ProductsDto, e.ApiError)
 }
 
 var (
@@ -95,6 +96,29 @@ func (s *productService) GetProductsByIdCategory(idCategory int) (dto.ProductsDt
 func (s *productService) GetProductsByText(texto string) (dto.ProductsDto, e.ApiError) {
 
 	var products model.Products = productCliente.GetProductsByText(texto) //objeto de la DB, a traves del DAO
+	var productsDto dto.ProductsDto
+	/*
+		if product.Id == 0 {
+			return productDto, e.NewBadRequestApiError("product not found")
+		}*/
+	for _, product := range products {
+		var productDto dto.ProductDto
+		productDto.Name = product.Name
+		productDto.Price = product.Price
+		productDto.Id = product.Id
+		productDto.Description = product.Description
+		productDto.Stock = product.Stock
+		productDto.IdCategory = product.IdCategory
+		productDto.Picture = product.Picture
+
+		productsDto = append(productsDto, productDto)
+	}
+	return productsDto, nil
+}
+
+//random products
+func (s *productService) GetRandomProducts(cantidad int) (dto.ProductsDto, e.ApiError) {
+	var products model.Products = productCliente.GetRandomProducts(cantidad) //objeto de la DB, a traves del DAO
 	var productsDto dto.ProductsDto
 	/*
 		if product.Id == 0 {

@@ -45,3 +45,13 @@ func GetProductsByText(texto string) model.Products {
 
 	return products
 }
+
+func GetRandomProducts(cantidad int) model.Products {
+	var products model.Products
+	Db.Order("RAND()").Limit(cantidad).Find(&products) //busca y guarda todo en products
+
+	log.Debug("Products: ", products)
+
+	return products
+
+}

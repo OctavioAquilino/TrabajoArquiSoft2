@@ -79,3 +79,19 @@ func GetProductsByText(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, productsDto)
 }
+
+//Productos aleatorios
+func GetRandomProducts(c *gin.Context) {
+	//	log.Debug("Product id to load: " + c.Param("idCategory"))
+
+	cantidad, _ := strconv.Atoi(c.Param("cantidad")) //se pasa el id de array a int
+	var productsDto dto.ProductsDto
+
+	productsDto, err := service.ProductService.GetRandomProducts(cantidad) //delega el trabajo al service
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+	c.JSON(http.StatusOK, productsDto)
+}

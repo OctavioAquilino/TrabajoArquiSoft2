@@ -74,10 +74,7 @@ func InsertOrdersDetail(ordersDetail model.OrderDetails) model.OrderDetails {
 			//TODO Manage Errors
 			log.Error("Pdto no encontrado")
 		}
+	}
 
-	}
-	for _, orderDetail := range ordersDetail {
-		log.Debug("Id de la order detail: ", orderDetail.Id)
-	}
 	return ordersDetail
 }
