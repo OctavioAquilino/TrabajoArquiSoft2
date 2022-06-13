@@ -340,7 +340,7 @@ fill: blue;
   border-radius: 5px;
 }
 .carrito_item img{
-  width: 9rem;
+  width: 5rem;
 }
 .carrito_item h3{
 margin-top: 1.5rem;
@@ -394,6 +394,6 @@ margin-top: 2rem;
 
 }
 .carrito_footer .btn:hover{
-  background-color: rgb(27, 205, 236);
+  background-color: rgb(27, 100, 236);
   color: rgb(0, 0, 0);
 }
