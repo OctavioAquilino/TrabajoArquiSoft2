@@ -11,33 +11,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func GetOrderDetailById(c *gin.Context) {
-	log.Debug("OrderDetail id to load: " + c.Param("id"))
-
-	id, _ := strconv.Atoi(c.Param("id")) //se pasa el id de array a int
-	var orderDetailDto dto.OrderDetailDto
-
-	orderDetailDto, err := service.OrderDetailService.GetOrderDetailById(id) //delega el trabajo al service
-
-	if err != nil {
-		c.JSON(err.Status(), err)
-		return
-	}
-	c.JSON(http.StatusOK, orderDetailDto)
-}
-
-func GetOrderDetails(c *gin.Context) {
-	var orderDetailsDto dto.OrderDetailsDto
-	orderDetailsDto, err := service.OrderDetailService.GetOrderDetails() //delega
-
-	if err != nil {
-		c.JSON(err.Status(), err)
-		return
-	}
-
-	c.JSON(http.StatusOK, orderDetailsDto)
-}
-
 func OrderDetailInsert(c *gin.Context) {
 	var orderDetailDto dto.OrderDetailDto
 	err := c.BindJSON(&orderDetailDto) //marshall, convierte de json a orderDetailDto

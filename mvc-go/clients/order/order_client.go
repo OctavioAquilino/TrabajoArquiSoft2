@@ -10,24 +10,6 @@ import (
 
 var Db *gorm.DB
 
-func GetOrderById(id int) model.Order {
-	var order model.Order
-
-	Db.Where("id = ?", id).First(&order) //traduccion y seteo en order
-	log.Debug("Order: ", order)
-
-	return order
-}
-
-func GetOrders() model.Orders {
-	var orders model.Orders
-	Db.Find(&orders) //busca y guarda todo en orders
-
-	log.Debug("Orders: ", orders)
-
-	return orders
-}
-
 func InsertOrder(order model.Order) model.Order {
 	result := Db.Create(&order)
 

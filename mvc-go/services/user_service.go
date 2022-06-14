@@ -17,7 +17,6 @@ type userService struct{}
 type userServiceInterface interface {
 	//siempre devuelve dto o error
 	GetUserById(id int) (dto.UserDto, e.ApiError)
-	GetUsers() (dto.UsersDto, e.ApiError)
 	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
 }
 
@@ -44,26 +43,6 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 	userDto.Phone = user.Phone
 	userDto.Id = user.Id
 	return userDto, nil
-}
-
-func (s *userService) GetUsers() (dto.UsersDto, e.ApiError) {
-
-	var users model.Users = userCliente.GetUsers()
-	var usersDto dto.UsersDto
-
-	for _, user := range users {
-		var userDto dto.UserDto
-		userDto.Name = user.Name
-		userDto.LastName = user.LastName
-		userDto.UserName = user.Name
-		userDto.Password = user.Password
-		userDto.Phone = user.Phone
-		userDto.Id = user.Id
-
-		usersDto = append(usersDto, userDto)
-	}
-
-	return usersDto, nil
 }
 
 //LOGIN

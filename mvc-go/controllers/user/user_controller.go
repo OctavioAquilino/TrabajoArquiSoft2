@@ -28,18 +28,6 @@ func GetUserById(c *gin.Context) {
 	c.JSON(http.StatusOK, userDto)
 }
 
-func GetUsers(c *gin.Context) {
-	var usersDto dto.UsersDto
-	usersDto, err := service.UserService.GetUsers() //delega
-
-	if err != nil {
-		c.JSON(err.Status(), err)
-		return
-	}
-
-	c.JSON(http.StatusOK, usersDto)
-}
-
 //PARTE DE AUTENTICACION JWT
 
 var jwtKey = []byte("secret_key")

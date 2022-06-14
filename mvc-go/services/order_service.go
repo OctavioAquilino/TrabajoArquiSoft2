@@ -17,9 +17,6 @@ import (
 type orderService struct{}
 
 type orderServiceInterface interface {
-	//siempre devuelve dto o error
-	GetOrderById(id int) (dto.OrderDto, e.ApiError)
-	GetOrders() (dto.OrdersDto, e.ApiError)
 	InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiError)
 	GetOrdersByIdUser(idUser int) (dto.OrdersDto, e.ApiError)
 }
@@ -30,42 +27,6 @@ var (
 
 func init() {
 	OrderService = &orderService{}
-}
-
-func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
-
-	var order model.Order = orderCliente.GetOrderById(id) //objeto de la DB, a traves del DAO
-	var orderDto dto.OrderDto
-
-	if order.Id == 0 {
-		return orderDto, e.NewBadRequestApiError("order not found")
-	}
-	orderDto.Id = order.Id
-	orderDto.Fecha = order.Fecha
-	orderDto.MontoFinal = order.MontoFinal
-	orderDto.IdUsuario = order.IdUser
-
-	return orderDto, nil
-}
-
-func (s *orderService) GetOrders() (dto.OrdersDto, e.ApiError) {
-
-	var orders model.Orders = orderCliente.GetOrders()
-	var ordersDto dto.OrdersDto
-
-	for _, order := range orders {
-		var orderDto dto.OrderDto
-
-		orderDto.Id = order.Id
-
-		orderDto.Fecha = order.Fecha
-		orderDto.MontoFinal = order.MontoFinal
-		orderDto.IdUsuario = order.IdUser
-
-		ordersDto = append(ordersDto, orderDto)
-	}
-
-	return ordersDto, nil
 }
 
 func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiError) {

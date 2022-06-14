@@ -19,15 +19,6 @@ func GetUserById(id int) model.User {
 	return user
 }
 
-func GetUsers() model.Users {
-	var users model.Users
-	Db.Find(&users) //busca y guarda todo en users
-
-	log.Debug("Users: ", users)
-
-	return users
-}
-
 func GetUserByUserName(userName string, password string) model.User {
 	var user model.User
 

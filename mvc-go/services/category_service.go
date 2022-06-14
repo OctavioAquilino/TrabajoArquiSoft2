@@ -12,8 +12,6 @@ import (
 type categoryService struct{}
 
 type categoryServiceInterface interface {
-	//siempre devuelve dto o error
-	GetCategoryById(id int) (dto.CategoryDto, e.ApiError)
 	GetCategories() (dto.CategoriesDto, e.ApiError)
 }
 
@@ -23,20 +21,6 @@ var (
 
 func init() {
 	CategoryService = &categoryService{}
-}
-
-func (s *categoryService) GetCategoryById(id int) (dto.CategoryDto, e.ApiError) {
-
-	var category model.Category = categoryCliente.GetCategoryById(id) //objeto de la DB, a traves del DAO
-	var categoryDto dto.CategoryDto
-
-	if category.Id == 0 {
-		return categoryDto, e.NewBadRequestApiError("category not found")
-	}
-	categoryDto.Descripcion = category.Description
-	categoryDto.Nombre = category.Name
-	categoryDto.IdCategory = category.Id
-	return categoryDto, nil
 }
 
 func (s *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {

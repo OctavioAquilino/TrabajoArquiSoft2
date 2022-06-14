@@ -14,12 +14,11 @@ import (
 func mapUrls() {
 	// Users Mapping
 	router.GET("/user/:id", userController.GetUserById)
-	//router.GET("/user", userController.GetUsers)
 	router.POST("/login", userController.UserLogin)
 
 	//Product Mapping
 	router.GET("/product/:id", productController.GetProductById)
-	//router.GET("/product", productController.GetProducts)
+	router.GET("/product", productController.GetProducts)
 	router.GET("/productRandom/:cantidad", productController.GetRandomProducts)
 
 	//filtros
@@ -28,24 +27,17 @@ func mapUrls() {
 	router.POST("/productText", productController.GetProductsByText)
 
 	//Address Mapping
-	//router.GET("/address/:id", addressController.GetAddressById)
-	//router.GET("/address", addressController.GetAddresses)
 	router.GET("/addressUser/:idUser", addressController.GetAddressByIdUser)
 
 	//Category Mapping
-	router.GET("/category/:id", categoryController.GetCategoryById)
 	router.GET("/category", categoryController.GetCategories)
 
 	//OrderDetail Mapping
-	//router.GET("/orderDetail/:id", orderDetailController.GetOrderDetailById)
-	//router.GET("/orderDetail", orderDetailController.GetOrderDetails)
 	router.POST("/orderDetail", orderDetailController.OrderDetailInsert)
 
 	router.GET("/orderDetailOrder/:idOrder", orderDetailController.GetOrderDetailByIdOrder)
 
 	//Order Mapping
-	//router.GET("/order/:id", orderController.GetOrderById)
-	//router.GET("/order", orderController.GetOrders)
 	router.POST("/order", orderController.OrderInsert)
 
 	router.GET("/orderUser/:idUser", orderController.GetOrdersByIdUser)
