@@ -37,3 +37,17 @@ func GetAddresses(c *gin.Context) {
 
 	c.JSON(http.StatusOK, addressesDto)
 }
+
+func GetAddressByIdUser(c *gin.Context) {
+
+	idUser, _ := strconv.Atoi(c.Param("idUser")) //se pasa el id de array a int
+	var addressDto dto.AddressesDto
+
+	addressDto, err := service.AddressService.GetAddressesByIdUser(idUser) //delega el trabajo al service
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+	c.JSON(http.StatusOK, addressDto)
+}

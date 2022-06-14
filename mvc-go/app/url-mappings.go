@@ -30,6 +30,7 @@ func mapUrls() {
 	//Address Mapping
 	router.GET("/address/:id", addressController.GetAddressById)
 	router.GET("/address", addressController.GetAddresses)
+	router.GET("/addressUser/:idUser", addressController.GetAddressByIdUser)
 
 	//Category Mapping
 	router.GET("/category/:id", categoryController.GetCategoryById)
