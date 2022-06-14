@@ -8,7 +8,7 @@ export const ProductosLista = ()=>{
     const [prodseach,setProdseach] = useState([]);
     const [busqueda, setBusqueda]= useState("");
     const fetchApi = async()=>{
-    const response = await fetch('http://localhost:8090/product')
+    const response = await fetch('http://localhost:8090/productRandom/10')
     .then((response) => response.json());
     setProductos(response);
     setProdseach(response);
