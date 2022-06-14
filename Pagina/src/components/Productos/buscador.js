@@ -33,8 +33,6 @@ export const ProductosBuscador = ()=>{
 
     };
     
-  
-
     return(
         <>
         <h1 className="title"> PRODUCTOS</h1>

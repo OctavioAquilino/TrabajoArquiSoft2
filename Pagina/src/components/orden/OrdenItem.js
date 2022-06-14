@@ -11,7 +11,7 @@ export const OrdenItem =(
 //poner la tabla
     return(
         <div className="orden">
-            <p>{monto_final},{fecha}</p>{
+            {
            OrdersDetalle.map((ordenDetalle) =>(
                 <OrdenDetalleItem key={ordenDetalle.id}
                 id={ordenDetalle.id}
@@ -24,6 +24,20 @@ export const OrdenItem =(
                 /> 
                 ))
            }
+            <table>
+         <thead>
+           <tr>
+             <th>Monto Final</th>
+             <th>Fecha</th>
+           </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>{monto_final}</td>
+               <td>{fecha}</td>
+             </tr>
+         </tbody>
+       </table>
         </div>
     )
 }
