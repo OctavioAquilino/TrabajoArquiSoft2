@@ -50,7 +50,6 @@ const Render =(
 )
     return(
         <>
-        <h1 className="title"> CATEGORIAS</h1>
         <div className="categorias">
             {
                 categorias.map(categoria =>(

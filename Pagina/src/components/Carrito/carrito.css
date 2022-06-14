@@ -1,0 +1,103 @@
+.productos{
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(22rem, 1fr));
+  gap: 3rem 2rem;
+  box-sizing: border-box;
+}
+.producto{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 10px 10px 2px rgba(0, 0, 0, 0.2);
+  border: 6px solid transparent;
+  border-radius: 5px;
+}
+.producto:hover{
+  border: 6px solid lightblue;
+}
+.producto_img img{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.producto_footer{
+  padding: 0.5rem;
+}
+.producto_footer h1{
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.producto_footer p{
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.55);
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.producto_footer .price{
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+}
+.producto .buttom{
+  width: 100%;
+  height: 45px;
+  display: grid;
+  justify-content: center;
+  padding: 0 1rem;
+  margin: 1rem;
+}
+.buttom .btn{
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+.buttom button{
+  background-color: rgb(0, 17, 255);
+  max-width: 250px;
+  width: 100%;
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+.buttom div{
+  background-color: rgb(76, 0, 255);
+  display: grid;
+  align-items: center;
+  text-align: center;
+  margin-left: -2rem;
+  border-radius: 5px;
+}
+.buttom div a{
+  color: white;
+  font-weight: 700;
+}
+.buttom div a:hover{
+  color: white;
+}
+.cantidad{
+display: inline-block;
+vertical-align: middle;
+padding-left: 20px;
+}
+
+.producto .cantidad {
+display: block;
+}
+
+.cantidad .number {
+display:block;
+font-size: 30px;
+margin-top: -15%;
+}
+
+.cantidad .subtotal {
+display: block;
+font-size: 20px;
+margin-top: 20px;
+}

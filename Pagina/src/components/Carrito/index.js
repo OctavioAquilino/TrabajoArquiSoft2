@@ -1,90 +1,150 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Logo from "../../Imagenes/Logo1.png"
-import {DataContext} from './Provider'
-export const Carrito = () => {
-    const value= useContext(DataContext)
-    const [menu,setMenu]= value.menu;
-    const [carrito,setCarrito] = value.carrito;
-    const [total]=value.total;
+import React, { useState, List, Checkbox} from "react";
+import "./carrito.css"
+import Cookies from "universal-cookie";
 
-    const tooglefalse = ()=>{
-        setMenu(false);
+const Cookie = new Cookies();
+
+
+async function getProductById(id){
+  return fetch("http://127.0.0.1:8090/product/" + id, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
     }
+  }).then(response => response.json())
+}
 
-    const show1 = menu? "carritos show" : "carritos";
-    const show2 = menu? "carrito show" : "carrito";
 
-    const removeProducto =id=>{
-        if(window.confirm){
-            carrito.forEach((item,index)=>{
-                if(item.id=== id){
-                item.stock=1;
-                carrito.splice(index,1)  
-                }
 
-            })
-            setCarrito([...carrito])
+async function getCartProducts(){
+  let items = []
+  let a = Cookie.get("cart").split(";")
+
+  for (let i = 0; i < a.length; i++){
+    let item = a[i];
+    if(item != ""){
+      let array = item.split(",")
+      let id = array[0]
+      let quantity = array[1]
+      let product = await getProductById(id)
+      product.quantity = quantity;
+      items.push(product)
+    }
+  }
+  return items
+}
+
+
+function getOptions(n){
+  let options = []
+  for(let i=1; i <= n; i++){
+    options.push(i)
+  }
+  return options.map((option) =>
+    <option value={option}> {option} </option>
+)
+}
+
+function remove(n, p_id){
+  let cookie = Cookie.get("cart");
+  let newCookie = ""
+  let toCompare = cookie.split(";")
+  let isEmpty = false
+  toCompare.forEach((item) => {
+    if(item != ""){
+      let array = item.split(",")
+      let item_id = array[0]
+      let item_quantity = array[1]
+      if(p_id == item_id){
+        item_quantity = Number(item_quantity) - n
+        if(item_quantity == 0){
+          isEmpty = true
         }
-        
+      }
+      if(p_id == item_id && !isEmpty){
+        newCookie += item_id + "," + item_quantity + ";"
+      }
+      else if (p_id != item_id){
+        newCookie += item_id + "," + item_quantity + ";"
+      }
     }
-    const resta = id =>{
-        carrito.forEach((item)=>{
-            if(item.id=== id){
-                item.stock ===1?item.stock=1: item.stock -=1
-            }
-            setCarrito([...carrito])
-        })
-    }
-    /*---En la suma tendria que iniar en uno, pero no se como*/
-    const suma = id =>{
-        carrito.forEach((item)=>{
-            if(item.id=== id){
-                item.stock+=1
-            }
-            setCarrito([...carrito])
-        })
-    }
+  });
+  cookie = newCookie
+  Cookie.set("cart", cookie, {path: "/"})
+  window.location.reload()
+  return
+}
 
-  return (
-    <div className={show1}>
-        <div className={show2}>
-            <div className='carrito_close' onClick={tooglefalse}>
-                <box-icon name="x"></box-icon>
-            </div>
-            <h2>SU CARRITO</h2>
-            
-                
-            <div className='carrito_center'>
-                {
-                    carrito.length ===0? <h2>CARRITO VACIO</h2>:
-                    <>
-                    {
-                    carrito.map((producto)=>(
-                <div className='carrito_item'>
-                    <img  src={producto.picture_url} className='logo' alt=''/>
-                    <div>
-                    <h3>{producto.name}</h3>
-                   <p className='price'>${producto.base_price}</p>
-                    </div>
-                <div>
-                <box-icon name="up-arrow" type="solid" onClick={()=>suma(producto.id)}></box-icon>
-                <p className='cantidad'>{producto.stock}</p>
-                <box-icon name="down-arrow" type="solid" onClick={()=>resta(producto.id)}></box-icon>
-                </div>
-                <div className='remove_item' onClick={()=>removeProducto(producto.id)}>
-                    <box-icon name="trash"></box-icon>
-                </div>
-                </div>
-                ))}
-                </>
-                }
-            </div>
-            
-            <div className='carrito_footer'>
-                <h3>Total: ${total}</h3>
-                <button className='btn'>Payment</button>
-            </div>
+
+function showProducts(products){
+  return products.map((product) =>
+
+   <div className="producto">
+   <div obj={product} key={product.id} >
+   <div>
+        <a href="#">
+        <div className="producto_img">
+            <img className="image" src={product.picture_url} alt=""/>
         </div>
+        </a>
+        <div className="producto_footer">
+            <h1>{product.name}</h1>
+            <p>{product.description}</p>
+            <p>Stock: {product.stock}</p>
+            <p className="price">${product.base_price}</p>
+            <h3 className="Remove"> Remover </h3>
+       <select id={"removeSelect" + product.id}>
+        {getOptions(product.quantity)}
+       </select>
+       <button className="remove" onClick={() => remove(document.getElementById("removeSelect" + product.id).value, product.id)}>x</button>
+       <h1 className="amount"> Cantidad: </h1>
+       <h1 className="number"> {product.quantity} </h1>
+       <h1 className="subtotal"> Subtotal: ${product.quantity * product.base_price} </h1>
+        </div>
+        </div>
+        </div>
+   </div>
+ )
+}
+
+async function setCart(setter, setterTotal){
+  let total = 0;
+  await getCartProducts().then(response => {
+    setter(response)
+    response.forEach((item) => {
+      total += item.base_price * item.quantity;
+    });
+    setterTotal(total)
+  })
+}
+
+function Cart(){
+  const [cartProducts, setCartProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+
+
+  if (cartProducts.length <= 0 ){
+    setCart(setCartProducts, setTotal)
+  }
+
+ 
+
+  const renderOrderButton = (
+    <div className="emptySpace">
+      <span> Total a pagar: ${total} </span>
+    
     </div>
   )
+
+  return (
+    <div>
+      {renderOrderButton}
+      <div className="productos">
+        {Cookie.get("cart") ? showProducts(cartProducts) : <a></a>}
+      </div>
+      
+      </div>
+  );
 }
+
+export default Cart;

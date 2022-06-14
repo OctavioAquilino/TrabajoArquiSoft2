@@ -1,16 +1,10 @@
 import React,{useContext, useState} from "react"
 import Logo from "../../Imagenes/Logo1.png"
 import {Link} from "react-router-dom";
-import { DataContext } from "../Carrito/Provider";
+
 
 export const Header = ()=>{
-    const value = useContext(DataContext);
-    const [menu,setMenu]= value.menu;
-    const [carrito]= value.carrito
-
-    const toogleMenu = ()=>{
-        setMenu(!menu);
-    }
+    
     return(
         <header>
         <Link to="/">
@@ -26,16 +20,18 @@ export const Header = ()=>{
                <Link to="/productos"> PRODUCTOS</Link> 
             </li>
             <li>
-               <Link to="/login"> LOG IN</Link> 
-            </li>
-            <li>
                <Link to="/order"> MIS ORDENES</Link> 
             </li>
+            <li>
+               <Link to="/login"> LOG IN</Link> 
+            </li>
         </ul>
-        <div className="cart" onClick={toogleMenu}>
-            <box-icon name='cart'></box-icon>
-            <span className="item_total"> {carrito.length}</span>
-        </div>
+
+        <Link to="/cart">
+        <div className="cart">
+                <box-icon name='cart'></box-icon>
+            </div>
+        </Link>
         </header>
     )
 }
