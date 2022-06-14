@@ -25,7 +25,7 @@ func mapUrls() {
 	//filtros
 	router.GET("/productCategory/:idCategory", productController.GetProductsByIdCategory)
 
-	router.GET("/productText", productController.GetProductsByText)
+	router.POST("/productText", productController.GetProductsByText)
 
 	//Address Mapping
 	//router.GET("/address/:id", addressController.GetAddressById)

@@ -1,22 +1,23 @@
 import React, { useContext, useEffect, useState} from "react";
 import { ProductoItem } from "./ProductoItem";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ProductosBuscador } from "./buscador";
 
 export const ProductosLista = ()=>{
 
     const [productos,setProductos] = useState([]);
-    const [prodseach,setProdseach] = useState([]);
+    //const [prodseach,setProdseach] = useState([]);
     const [busqueda, setBusqueda]= useState("");
     const fetchApi = async()=>{
-    const response = await fetch('http://localhost:8090/productRandom/10')
+    const response = await fetch('http://localhost:8090/productRandom/9')
     .then((response) => response.json());
     setProductos(response);
-    setProdseach(response);
+    //setProdseach(response);
     };
     useEffect(()=>{
     fetchApi();
     },[])
-    const handleChange=e=>{
+    /*const handleChange=e=>{
         setBusqueda(e.target.value);
         filtrar(e.target.value);
       }
@@ -29,18 +30,12 @@ export const ProductosLista = ()=>{
         });
         setProductos(resultadosBusqueda);
       }
-
+*/
     return(
         <>
-        <h1 className="title"> PRODUCTOS</h1>
-        <div className="containerInput">
-        <input
-          className="form-control inputBuscar"
-          value={busqueda}
-          placeholder="Buscador de Productos"
-          onChange={handleChange}
-        />
-      </div>
+        <ProductosBuscador/>
+        
+        
 
         <div className="productos">
             {

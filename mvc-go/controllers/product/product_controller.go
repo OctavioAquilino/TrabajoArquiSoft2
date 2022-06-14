@@ -61,8 +61,12 @@ func GetProductsByText(c *gin.Context) {
 		log.Debug("Text looking: " + c.Param("texto"))
 		var texto string = c.Param("texto")
 	*/
-	var texto string
-	err1 := c.BindJSON(&texto)
+	var textoDto dto.TextoDto
+	//var texto string
+
+	err1 := c.BindJSON(&textoDto)
+	var texto string = textoDto.Texto
+	log.Debug("texto:", texto)
 	if err1 != nil {
 		log.Error(err1.Error())
 		c.JSON(http.StatusBadRequest, err1.Error())

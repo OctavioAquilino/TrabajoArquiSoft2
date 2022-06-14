@@ -47,7 +47,7 @@ var jwtKey = []byte("secret_key")
 func UserLogin(c *gin.Context) {
 	var loginDto dto.LoginDto
 	err := c.BindJSON(&loginDto)
-	log.Debug(loginDto, "tetas")
+	log.Debug(loginDto)
 	if err != nil {
 		log.Error(err.Error())
 		c.JSON(http.StatusBadRequest, err.Error())
