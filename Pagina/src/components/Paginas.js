@@ -7,8 +7,8 @@ import {CategoryLista} from "./Inicio/index"
 export const Paginas = ()=>{
     return(
         <section>
-          <Routes>
-          <Route path="/" exact element={<CategoryLista/>} />
+        <Routes>
+        <Route path="/" exact element={<CategoryLista/>} />
         <Route path="/productos" exact element={<ProductosLista/>} />
         <Route path="/login" exact element={<IndexLogin/>} />
         </Routes>  
