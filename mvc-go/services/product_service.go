@@ -49,7 +49,9 @@ func (s *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 
 	var products model.Products = productCliente.GetProducts()
 	var productsDto dto.ProductsDto
-
+	if len(products) == 0 {
+		return productsDto, e.NewBadRequestApiError("products not found")
+	}
 	for _, product := range products {
 		var productDto dto.ProductDto
 		productDto.Name = product.Name
@@ -72,10 +74,9 @@ func (s *productService) GetProductsByIdCategory(idCategory int) (dto.ProductsDt
 
 	var products model.Products = productCliente.GetProductsByIdCategory(idCategory) //objeto de la DB, a traves del DAO
 	var productsDto dto.ProductsDto
-	/*
-		if product.Id == 0 {
-			return productDto, e.NewBadRequestApiError("product not found")
-		}*/
+	if len(products) == 0 {
+		return productsDto, e.NewBadRequestApiError("products not found")
+	}
 	for _, product := range products {
 		var productDto dto.ProductDto
 		productDto.Name = product.Name
@@ -97,10 +98,9 @@ func (s *productService) GetProductsByText(texto string) (dto.ProductsDto, e.Api
 
 	var products model.Products = productCliente.GetProductsByText(texto) //objeto de la DB, a traves del DAO
 	var productsDto dto.ProductsDto
-	/*
-		if product.Id == 0 {
-			return productDto, e.NewBadRequestApiError("product not found")
-		}*/
+	if len(products) == 0 {
+		return productsDto, e.NewBadRequestApiError("products not found")
+	}
 	for _, product := range products {
 		var productDto dto.ProductDto
 		productDto.Name = product.Name
@@ -120,10 +120,9 @@ func (s *productService) GetProductsByText(texto string) (dto.ProductsDto, e.Api
 func (s *productService) GetRandomProducts(cantidad int) (dto.ProductsDto, e.ApiError) {
 	var products model.Products = productCliente.GetRandomProducts(cantidad) //objeto de la DB, a traves del DAO
 	var productsDto dto.ProductsDto
-	/*
-		if product.Id == 0 {
-			return productDto, e.NewBadRequestApiError("product not found")
-		}*/
+	if len(products) == 0 {
+		return productsDto, e.NewBadRequestApiError("products not found")
+	}
 	for _, product := range products {
 		var productDto dto.ProductDto
 		productDto.Name = product.Name

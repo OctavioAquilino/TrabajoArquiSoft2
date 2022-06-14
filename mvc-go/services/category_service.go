@@ -27,7 +27,9 @@ func (s *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {
 
 	var categories model.Categories = categoryCliente.GetCategories()
 	var categoriesDto dto.CategoriesDto
-
+	if len(categories) == 0 {
+		return categoriesDto, e.NewBadRequestApiError("categories not found")
+	}
 	for _, category := range categories {
 		var categoryDto dto.CategoryDto
 		categoryDto.Descripcion = category.Description

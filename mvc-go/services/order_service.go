@@ -98,10 +98,9 @@ func (s *orderService) GetOrdersByIdUser(idUser int) (dto.OrdersDto, e.ApiError)
 	var orders model.Orders = orderCliente.GetOrdersByIdUser(idUser) //objeto de la DB, a traves del DAO
 	var ordersDto dto.OrdersDto
 
-	/*
-		if (size(orders) == 0) {
-			return orderResponseDto, e.NewBadRequestApiError("order not found")
-		}*/
+	if len(orders) == 0 {
+		return ordersDto, e.NewBadRequestApiError("order not found")
+	}
 
 	for _, order := range orders {
 		var orderDto dto.OrderDto

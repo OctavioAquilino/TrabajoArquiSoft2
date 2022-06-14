@@ -11,27 +11,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func OrderDetailInsert(c *gin.Context) {
-	var orderDetailDto dto.OrderDetailDto
-	err := c.BindJSON(&orderDetailDto) //marshall, convierte de json a orderDetailDto
-
-	// Error Parsing json param
-	if err != nil {
-		log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, err.Error())
-		return
-	}
-
-	orderDetailDto, er := service.OrderDetailService.InsertOrderDetail(orderDetailDto) //delega, simpre envia dto
-	// Error del Insert
-	if er != nil {
-		c.JSON(er.Status(), er)
-		return
-	}
-
-	c.JSON(http.StatusCreated, orderDetailDto)
-}
-
 func GetOrderDetailByIdOrder(c *gin.Context) {
 	log.Debug("OrderDetail id to load: " + c.Param("idOrder"))
 

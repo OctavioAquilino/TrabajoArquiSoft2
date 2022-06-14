@@ -27,10 +27,10 @@ func (s *addressService) GetAddressesByIdUser(idUser int) (dto.AddressesDto, e.A
 
 	var addresses model.Addresses = addressCliente.GetAddressesByIdUser(idUser) //objeto de la DB, a traves del DAO
 	var addressesDto dto.AddressesDto
-	/*
-		if addresses.Id == 0 {
-			return addressesDto, e.NewBadRequestApiError("addresses not found")
-		}*/
+
+	if len(addresses) == 0 {
+		return addressesDto, e.NewBadRequestApiError("addresses not found")
+	}
 	for _, address := range addresses {
 		var addressDto dto.AddressDto
 		addressDto.Id = address.Id

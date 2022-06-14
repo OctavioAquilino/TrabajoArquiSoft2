@@ -33,8 +33,6 @@ func mapUrls() {
 	router.GET("/category", categoryController.GetCategories)
 
 	//OrderDetail Mapping
-	router.POST("/orderDetail", orderDetailController.OrderDetailInsert)
-
 	router.GET("/orderDetailOrder/:idOrder", orderDetailController.GetOrderDetailByIdOrder)
 
 	//Order Mapping
