@@ -10,7 +10,18 @@ export const OrdenItem =(
 })=>{
 //poner la tabla
     return(
+      <div>
         <div className="orden">
+          <table>
+          <thead>
+           <tr>
+             <th>Producto---</th>
+             <th>Precio Unitario---</th>
+             <th>Cantidad---</th>
+             <th>Total</th>
+           </tr>
+         </thead>
+         </table>
             {
            OrdersDetalle.map((ordenDetalle) =>(
                 <OrdenDetalleItem key={ordenDetalle.id}
@@ -24,10 +35,12 @@ export const OrdenItem =(
                 /> 
                 ))
            }
+          
+            
             <table>
          <thead>
            <tr>
-             <th>Monto Final</th>
+             <th>Monto Final------</th>
              <th>Fecha</th>
            </tr>
          </thead>
@@ -38,6 +51,12 @@ export const OrdenItem =(
              </tr>
          </tbody>
        </table>
+        </div>
+        <div>
+
+<p>-------------------------------------------------------------------------------</p>
+
+        </div>
         </div>
     )
 }

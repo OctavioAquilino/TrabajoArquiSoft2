@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { OrdenDetalleItem } from "./OrdenDetalleItem";
 import { OrdenItem } from "./OrdenItem";
+import {IndexLogin} from "../login/IndexLogin"
 export const GetOrders = ()=>{
 
     const [ordenes,setOrdenes]=useState([]);
     //const [ordenReq,setOrdenReq]=useState([]);
     //const [ordenDetalle,setOrdenDetalle]=useState([]);
-
+    
    
     const getOrdenes = async()=>{
         const response = await fetch('http://localhost:8090/orderUser/1')
