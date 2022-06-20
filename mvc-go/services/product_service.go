@@ -42,6 +42,7 @@ func (s *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 	productDto.Description = product.Description
 	productDto.Stock = product.Stock
 	productDto.IdCategory = product.IdCategory
+	productDto.Picture = product.Picture
 	return productDto, nil
 }
 

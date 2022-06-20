@@ -24,7 +24,7 @@ func init() {
 	// DB Connections Paramters
 	DBName := "trabajoarqui"
 	DBUser := "root"
-	DBPass := "root"
+	DBPass := ""
 	//DBPass := os.Getenv("MVC_DB_PASS")
 	DBHost := "127.0.0.1" //127001
 	// ------------------------
