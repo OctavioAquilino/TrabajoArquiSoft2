@@ -10,6 +10,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 )
+
 //para el final dockerizar hacer git pull y docker compose para levantar todo de una
 //y testing, md5 para la contraseña no tnenerlo en texto plano, hasheo
 func mapUrls() {
@@ -25,7 +26,7 @@ func mapUrls() {
 	//filtros
 	router.GET("/productCategory/:idCategory", productController.GetProductsByIdCategory)
 
-	router.POST("/productText", productController.GetProductsByText)
+	router.GET("/productText/:texto", productController.GetProductsByText)
 
 	//Address Mapping
 	router.GET("/addressUser/:idUser", addressController.GetAddressByIdUser)

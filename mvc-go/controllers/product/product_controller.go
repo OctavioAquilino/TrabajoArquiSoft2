@@ -61,19 +61,31 @@ func GetProductsByText(c *gin.Context) {
 		log.Debug("Text looking: " + c.Param("texto"))
 		var texto string = c.Param("texto")
 	*/
-	var textoDto dto.TextoDto
+	//var textoDto dto.TextoDto
 	//var texto string
 
-	err1 := c.BindJSON(&textoDto)
+	//err1 := c.BindJSON(&textoDto)
 
-	var texto string = textoDto.Texto
-	log.Debug("texto:", texto)
-	if err1 != nil {
+	//var texto string = textoDto.Texto
+	var text string = c.Param("texto")
+	log.Debug("texto:", text)
+	/*if err1 != nil {
 		log.Error(err1.Error())
 		c.JSON(http.StatusBadRequest, err1.Error())
 		return
 	}
+	*/
+	var texto string
+	for _, letra := range text {
 
+		//l := strconv.QuoteRune(letra)
+		l, _ := strconv.Unquote(strconv.QuoteRune(letra))
+		if letra == '+' {
+			l = " "
+		}
+		texto = texto + l
+	}
+	//manejar errores
 	var productsDto dto.ProductsDto
 
 	productsDto, err := service.ProductService.GetProductsByText(texto) //delega el trabajo al service
