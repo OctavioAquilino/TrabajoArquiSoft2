@@ -30,22 +30,12 @@ export const CrearOrden = ()=>{
     
         };
 
-        return(
+    return(
             <>
             <h1 className="title"> ORDEN</h1>
-            <div className="containerInput" >
-           
-            <input
-            value = "Comprar"
-             type = "button"
-            onClick = {handleComprar}
-            />
-            
-          </div>
-    
-           
-            
+        <div className="containerInput" >   
+        <input value = "Comprar" type = "button" onClick = {handleComprar}/>
+        </div>
             </>
         )
-
 }

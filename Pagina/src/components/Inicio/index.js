@@ -1,5 +1,4 @@
 import React, {useEffect, useState } from "react";
-import { CategoryItem } from "./CategoryItem";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductoItem } from "../Productos/ProductoItem";
 
@@ -28,8 +27,13 @@ export const CategoryLista =()=>{
     const [productos,setProductos]=useState([]);
     async function Handle (id) {
     const response = await GetProductByIdCategory(id)
+    if (response.status == 400) {
+      alert("NO HAY PRODUCTOS EN ESTA CATEGORIA")
+      window.location.reload();
+   }else{
     setProductos(response)
     console.log(response);
+   }
     };
 const Render =(
     <div className="productos">
@@ -54,16 +58,13 @@ const Render =(
             {
                 categorias.map(categoria =>(
                   <button className="category"onClick={()=>Handle(categoria.id_category)}>
-                      <CategoryItem key={categoria.id_category}
-                  name={categoria.nombre}
-                  />
+                    <span>{categoria.nombre}</span>
                   </button>
                 ))
-                
             }
         </div>
           <div>
-              {productos>0? "No hay Productos en esta categoria": Render}
+              {Render}
           </div>
         </>
     );

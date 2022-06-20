@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
 import { ProductoItem } from "./ProductoItem";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export const ProductosBuscador = ()=>{
 
     const [productos,setProductos] = useState([]);
-    //const [prodseach,setProdseach] = useState([]);
     const [busqueda, setBusqueda]= useState("");
 
     const requestOptions={
@@ -19,7 +18,14 @@ export const ProductosBuscador = ()=>{
       
         const response = await fetch('http://localhost:8090/productText',requestOptions)
         .then((response) => response.json());
-        setProductos(response);
+        if (response.status == 400) {
+          alert("NO SE ENCONTRÓ DICHO PRODUCTO")
+          window.location.reload();
+       }else{
+        
+        setProductos(response)
+        console.log(response);
+       }
         };
 
     const handleChange=e=>{
@@ -28,7 +34,6 @@ export const ProductosBuscador = ()=>{
 
       const handleSubmit= (event)=>{
         event.preventDefault();
-        //alert(busqueda)
         fetchApi();
 
     };
@@ -51,7 +56,6 @@ export const ProductosBuscador = ()=>{
         onClick = {handleSubmit}
         />
       </div>
-
         <div className="productos">
             {
                 productos.map(producto =>(
