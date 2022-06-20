@@ -59,7 +59,7 @@ func UserLogin(c *gin.Context) {
 		}
 		c.JSON(http.StatusBadRequest, "Bad request")
 		return
-	}
+	} ///esto deberia estar en el service
 
 	if !tkn.Valid {
 		c.JSON(http.StatusUnauthorized, "Invalid token")

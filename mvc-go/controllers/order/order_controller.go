@@ -36,6 +36,7 @@ func OrderInsert(c *gin.Context) {
 
 func GetOrdersByIdUser(c *gin.Context) {
 	log.Debug("Order id to load: " + c.Param("idUser"))
+//validar si el token sea valido
 
 	idUser, _ := strconv.Atoi(c.Param("idUser")) //se pasa el id de array a int
 	var ordersDto dto.OrdersDto
