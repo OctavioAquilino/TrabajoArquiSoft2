@@ -1,7 +1,5 @@
 import React from "react";
-import { useContext } from "react";
-import {Link} from "react-router-dom";
-import { DataContext } from "../Carrito/Provider";
+import {addToCart} from "../cookies/add2car"
 export const ProductoItem =(
     {id,
     name,
@@ -12,8 +10,7 @@ export const ProductoItem =(
     id_category
 })=>{
 
-    const value= useContext(DataContext);
-    const addCarrito = value.addCarrito;
+
     return(
         <div className="producto">
         <a href="#">
@@ -24,13 +21,17 @@ export const ProductoItem =(
         <div className="producto_footer">
             <h1>{name}</h1>
             <p>{description}</p>
-            <p>Stock: {stock}</p>
-            <p className="price">${base_price}</p>
+            {stock>0?<p>Stock: {stock}</p>:
+            <p>Sin Stock</p>}
+            
+            <p className="price">U$S {base_price}</p>
         </div>
         <div className="buttom">
-            <button className="btn" onClick={()=> addCarrito(id)}>
+        {stock>0?
+            <button className="btn" onClick={()=> addToCart(id)}>
                 Agregar
-            </button>
+            </button>:
+            <p>Este Producto no esta Disponible</p>}
         </div>
         </div>
     )

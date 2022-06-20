@@ -1,4 +1,4 @@
-import React,{useContext, useState} from "react"
+import React from "react"
 import Logo from "../../Imagenes/Logo1.png"
 import {Link} from "react-router-dom";
 
@@ -12,18 +12,43 @@ export const Header = ()=>{
                 <img src={Logo} alt="logo" width="150"/>
             </div>
         </Link>
+        
         <ul>
             <li>
-               <Link to="/"> INICIO</Link> 
+               <Link to="/" className="botones_menu">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+               INICIO
+               </Link> 
             </li>
             <li>
-               <Link to="/productos"> PRODUCTOS</Link> 
+               <Link to="/productos" className="botones_menu">
+               <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+               PRODUCTOS
+               </Link> 
             </li>
             <li>
-               <Link to="/order"> MIS ORDENES</Link> 
+               <Link to="/order" className="botones_menu"> 
+               <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                MIS ORDENES
+                </Link> 
             </li>
             <li>
-               <Link to="/login"> LOG IN</Link> 
+               <Link to="/login" className="botones_menu">
+               <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                LOG IN
+                </Link> 
             </li>
         </ul>
 

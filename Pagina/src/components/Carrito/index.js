@@ -90,8 +90,7 @@ function showProducts(products){
         <div className="producto_footer">
             <h1>{product.name}</h1>
             <p>{product.description}</p>
-            <p>Stock: {product.stock}</p>
-            <p className="price">${product.base_price}</p>
+            <p className="price">U$S {product.base_price}</p>
             <h3 className="Remove"> Remover </h3>
        <select id={"removeSelect" + product.id}>
         {getOptions(product.quantity)}
@@ -99,7 +98,7 @@ function showProducts(products){
        <button className="remove" onClick={() => remove(document.getElementById("removeSelect" + product.id).value, product.id)}>x</button>
        <h1 className="amount"> Cantidad: </h1>
        <h1 className="number"> {product.quantity} </h1>
-       <h1 className="subtotal"> Subtotal: ${product.quantity * product.base_price} </h1>
+       <h1 className="subtotal"> Subtotal: U$S {product.quantity * product.base_price} </h1>
         </div>
         </div>
         </div>
@@ -131,18 +130,24 @@ function Cart(){
 
   const renderOrderButton = (
     <div className="emptySpace">
-      <span> Total a pagar: ${total} </span>
-    
+      <span> Total a Pagar: U$S {total} </span>
     </div>
   )
 
   return (
     <div>
-      {renderOrderButton}
+      <h1 className="title"> TU CARRITO</h1>
       <div className="productos">
         {Cookie.get("cart") ? showProducts(cartProducts) : <a></a>}
       </div>
       
+      {cartProducts.length>=1 ? 
+      <div className="pago">
+        {renderOrderButton}
+        <button className="payment" /*onClick={LLAMO A LA FUNCION QUE GENERA LA ORDER}*/> Payment</button>
+      </div>:
+      <div><h2>Tu Carrito esta vacio</h2></div>
+      }
       </div>
   );
 }

@@ -46,7 +46,7 @@ export default function IndexLogin(){
         <form onSubmit={handleSubmit} >
         <ul className="ul">
         
-        <h1 className="title">login</h1>
+        <h1 className="login">LOGIN</h1>
         
           <li>
         <input id="user" type={"text"} placeholder="user" onChange={onChangeUser} value ={user} required></input>
