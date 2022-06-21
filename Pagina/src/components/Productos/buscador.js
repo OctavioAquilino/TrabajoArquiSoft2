@@ -6,17 +6,16 @@ export const ProductosBuscador = ()=>{
 
     const [productos,setProductos] = useState([]);
     const [busqueda, setBusqueda]= useState("");
-
-    const requestOptions={
+   /* const requestOptions={
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         
         body: JSON.stringify({texto:busqueda})
     };
-
+*/
     const fetchApi = async()=>{
       
-        const response = await fetch('http://localhost:8090/productText',requestOptions)
+        const response = await fetch('http://localhost:8090/productText/'+busqueda)
         .then((response) => response.json());
         if (response.status == 400) {
           alert("NO SE ENCONTRÓ DICHO PRODUCTO")
@@ -29,11 +28,15 @@ export const ProductosBuscador = ()=>{
         };
 
     const handleChange=e=>{
-        setBusqueda(e.target.value);
+     setBusqueda(e.target.value);
+     
+   
       };
 
       const handleSubmit= (event)=>{
         event.preventDefault();
+        
+      
         fetchApi();
 
     };
