@@ -1,16 +1,16 @@
 import Cookies from "universal-cookie";
 
 const Cookie= new Cookies()
-export function addToCart(id){
+export function CookieUser(id,token){
   
-    let cookie = Cookie.get("cart");
+    let cookie = Cookie.get("user");
    
     if(cookie == undefined){
-      Cookie.set("cart", id + ",1;", {path: "/"});
+      Cookie.set("user", id + "," + token + ";", {path: "/"});
      
       return
     }
-    let newCookie = ""
+    /*let newCookie = ""
     let isNewItem = true
     let toCompare = cookie.split(";")
     let total = 0;
@@ -33,7 +33,7 @@ export function addToCart(id){
     }
     cookie = newCookie
     Cookie.set("cart", cookie, {path: "/"})
-   
+   */
     return
   }
    

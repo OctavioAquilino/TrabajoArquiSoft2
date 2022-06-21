@@ -1,5 +1,8 @@
 import React from "react";
 import {addToCart} from "../cookies/add2car"
+
+
+
 export const ProductoItem =(
     {id,
     name,

@@ -51,7 +51,7 @@ var jwtKey = []byte("secret_key")
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
 	//var user model.User
 	log.Debug(loginDto)
-	var user model.User = userCliente.GetUserByUserName(loginDto.UserName, loginDto.Password) //objeto de la DB, a traves del DAO
+	var user model.User = userCliente.GetUserByUserName(loginDto.UserName) //objeto de la DB, a traves del DAO
 	//var userDto dto.UserDto
 	var tokenDto dto.TokenDto
 
@@ -63,6 +63,11 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError
 		token := jwt.New(jwt.SigningMethodHS256)
 		tokenString, _ := token.SignedString(jwtKey)
 		tokenDto.Token = tokenString
+		tokenDto.IdUser = user.Id
+
+		return tokenDto, nil
+	} else {
+		return tokenDto, e.NewBadRequestApiError("contraseña incorrecta")
 	}
-	return tokenDto, nil
+
 }

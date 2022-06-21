@@ -1,11 +1,13 @@
 
 import React,{ useState} from "react"
 import "./Prueba1.css"
+import Cookies from "universal-cookie";
+import {CookieUser} from "../cookies/cookieUser"
 
 export default function IndexLogin(){
     const[user,setUser]= useState("");
     const[password,setPassword] = useState("");
-
+    const[cookieU,setCookieU]=useState("")
     const onChangeUser =  (user)=>{
         setUser(user.target.value);
         
@@ -29,6 +31,8 @@ export default function IndexLogin(){
            window.location.reload();
         }else{
             console.log(response.json());
+            setCookieU(response);
+            CookieUser(user,cookieU.token)
             window.location.replace('/');
         }})
         
