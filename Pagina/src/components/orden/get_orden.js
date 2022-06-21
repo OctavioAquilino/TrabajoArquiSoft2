@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Cookies from "universal-cookie";
 //import { OrdenDetalleItem } from "./OrdenDetalleItem";
 import { OrdenItem } from "./OrdenItem";
 //import {IndexLogin} from "../login/IndexLogin"
+
+const Cookie = new Cookies();
 
 async function GetOrdersByIdUser(id) {
     return fetch('http://localhost:8090/orderUser/' +id, {
@@ -43,7 +46,11 @@ export const GetOrders = ()=>{
             //console.log(response);
             };
             useEffect(()=>{
-                Handle(1);
+                let a = Cookie.get("user").split(";")
+                let array = a[0].split(",")
+                let id_user = array[0]
+                
+                Handle(id_user);
                 },[])
         return(
             <>

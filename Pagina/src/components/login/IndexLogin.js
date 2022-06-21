@@ -3,11 +3,11 @@ import React,{ useState} from "react"
 import "./Prueba1.css"
 import Cookies from "universal-cookie";
 import {CookieUser} from "../cookies/cookieUser"
-
+const Cookie =new Cookies();
 export default function IndexLogin(){
     const[user,setUser]= useState("");
     const[password,setPassword] = useState("");
-    const[cookieU,setCookieU]=useState("")
+  //  const[cookieU,setCookieU]=useState("")
     const onChangeUser =  (user)=>{
         setUser(user.target.value);
         
@@ -29,13 +29,12 @@ export default function IndexLogin(){
         .then(response => {if (response.status == 400) {
            alert("user not found")
            window.location.reload();
-        }else{
-            console.log(response.json());
-            setCookieU(response);
-            CookieUser(user,cookieU.token)
-            window.location.replace('/');
-        }})
-        
+        }
+        return response.json()})
+        .then(data => {
+            Cookie.set("user", data.id_user + "," + data.token+ ";", {path: "/"})
+    })
+   
     };
    
     const handleSubmit= (event)=>{
