@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import { OrdenDetalleItem } from "./OrdenDetalleItem";
 import { OrdenItem } from "./OrdenItem";
@@ -42,12 +42,15 @@ export const GetOrders = ()=>{
             //setOrdenes(response)
             //console.log(response);
             };
+            useEffect(()=>{
+                Handle(1);
+                },[])
         return(
             <>
             <h1 className="title">MIS ORDENES</h1>
             <div>
                 <div className="ordenes">
-            <input className="mostrar" value = "Mostrar" type = "button" onClick = {()=>Handle(1)}/>
+            
             {
                 ordenes.map(orden =>(
                     <div>
