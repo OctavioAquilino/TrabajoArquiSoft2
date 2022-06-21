@@ -75,7 +75,7 @@ func GetProductsByText(c *gin.Context) {
 		return
 	}
 	*/
-	var texto string
+	/*var texto string
 	for _, letra := range text {
 
 		//l := strconv.QuoteRune(letra)
@@ -84,11 +84,11 @@ func GetProductsByText(c *gin.Context) {
 			l = " "
 		}
 		texto = texto + l
-	}
+	}*/
 	//manejar errores
 	var productsDto dto.ProductsDto
 
-	productsDto, err := service.ProductService.GetProductsByText(texto) //delega el trabajo al service
+	productsDto, err := service.ProductService.GetProductsByText(text) //delega el trabajo al service
 
 	if err != nil {
 		c.JSON(err.Status(), err)
