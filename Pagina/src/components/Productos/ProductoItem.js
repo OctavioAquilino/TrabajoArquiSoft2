@@ -1,8 +1,22 @@
 import React from "react";
 import {addToCart} from "../cookies/add2car"
+import Cookies from "universal-cookie";
 
-
-
+function notLogin(){
+    alert("Debe loguearse")
+    window.location.replace("/login")
+}
+const Cookie = new Cookies();
+let cookie = Cookie.get("user")
+    let id_user;
+    if(cookie!=undefined){
+    let a = cookie.split(";")
+    let array = a[0].split(",")
+     id_user = array[0]
+    }
+    else{
+         id_user = "undefined"
+    }
 export const ProductoItem =(
     {id,
     name,
@@ -31,9 +45,13 @@ export const ProductoItem =(
         </div>
         <div className="buttom">
         {stock>0?
+            id_user!="undefined"?
             <button className="btn" onClick={()=> addToCart(id)}>
                 Agregar
             </button>:
+            <button className="btn" onClick={()=>notLogin()}>
+            Agregar
+        </button>:
             <p>Este Producto no esta Disponible</p>}
         </div>
         </div>

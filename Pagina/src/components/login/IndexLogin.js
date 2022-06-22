@@ -7,7 +7,7 @@ const Cookie =new Cookies();
 export default function IndexLogin(){
     const[user,setUser]= useState("");
     const[password,setPassword] = useState("");
-  //  const[cookieU,setCookieU]=useState("")
+  
     const onChangeUser =  (user)=>{
         setUser(user.target.value);
         
@@ -27,12 +27,17 @@ export default function IndexLogin(){
     const login = async()=>{
         fetch('http://localhost:8090/login',requestOptions)
         .then(response => {if (response.status == 400) {
-           alert("user not found")
+           alert("Datos incorrectos")
            window.location.reload();
+           return response.json()
+        }
+        if(response.status==201){
+          window.location.replace("/")
+          return response.json()
         }
         return response.json()})
-        .then(data => {
-            Cookie.set("user", data.id_user + "," + data.token+ ";", {path: "/"})
+        .then(response => {
+            Cookie.set("user", response.id_user + "," + response.token+ ";", {path: "/"})
     })
    
     };

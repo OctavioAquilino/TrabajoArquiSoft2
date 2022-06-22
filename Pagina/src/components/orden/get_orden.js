@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
-//import { OrdenDetalleItem } from "./OrdenDetalleItem";
 import { OrdenItem } from "./OrdenItem";
-//import {IndexLogin} from "../login/IndexLogin"
+
 
 const Cookie = new Cookies();
 
@@ -17,22 +16,17 @@ async function GetOrdersByIdUser(id) {
       .then(data => data.json())
    }
 export const GetOrders = ()=>{
-
+    let cookie = Cookie.get("user")
+    let id_user;
+    if(cookie!=undefined){
+    let a = cookie.split(";")
+    let array = a[0].split(",")
+     id_user = array[0]
+    }
+    else{
+         id_user = "undefined"
+    }
     const [ordenes,setOrdenes]=useState([]);
-    //const [ordenReq,setOrdenReq]=useState([]);
-    //const [ordenDetalle,setOrdenDetalle]=useState([]);
-    
-    /*const getOrdenes = async()=>{
-        const response = await fetch('http://localhost:8090/orderUser/1')
-        .then((response) => response.json());
-        setOrdenes(response);
-        //setOrdenDetalle(orden.OrdersDetalle)
-        };
-        const handleSubmit= (event)=>{
-            event.preventDefault();
-            //alert(busqueda)
-           getOrdenes();
-        };*/
         async function Handle (id) {
             const response = await GetOrdersByIdUser(id)
             if (response.status == 400) {
@@ -42,16 +36,17 @@ export const GetOrders = ()=>{
                 setOrdenes(response)
                 console.log(response);
              }
-            //setOrdenes(response)
-            //console.log(response);
+            
             };
-            useEffect(()=>{
-                let a = Cookie.get("user").split(";")
-                let array = a[0].split(",")
-                let id_user = array[0]
-                
-                Handle(id_user);
-                },[])
+    useEffect(()=>{
+        if(id_user!="undefined"){
+        Handle(id_user);
+        }
+        else{
+            alert("Debe loguearse")
+            window.location.replace("/login")
+        }
+        },[])
         return(
             <>
             <h1 className="title">MIS ORDENES</h1>
@@ -77,7 +72,9 @@ export const GetOrders = ()=>{
             
             </>      
         )
-}
+    }
+   
+
 
 
 

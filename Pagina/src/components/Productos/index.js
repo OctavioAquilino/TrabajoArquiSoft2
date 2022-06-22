@@ -3,6 +3,7 @@ import { ProductoItem } from "./ProductoItem";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductosBuscador } from "./buscador";
 
+
 export const ProductosLista = ()=>{
 
     const [productos,setProductos] = useState([]);
