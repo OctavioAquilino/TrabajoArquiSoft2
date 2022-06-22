@@ -19,8 +19,7 @@ export const GetOrders = ()=>{
     let cookie = Cookie.get("user")
     let id_user;
     if(cookie!=undefined){
-    let a = cookie.split(";")
-    let array = a[0].split(",")
+    let array = cookie.split(",")
      id_user = array[0]
     }
     else{
@@ -31,10 +30,9 @@ export const GetOrders = ()=>{
             const response = await GetOrdersByIdUser(id)
             if (response.status == 400) {
                 alert("NO HA REALIZADO NINGUNA ORDEN")
-                //window.location.reload();
+                
              }else{
                 setOrdenes(response)
-                console.log(response);
              }
             
             };
@@ -46,7 +44,7 @@ export const GetOrders = ()=>{
             alert("Debe loguearse")
             window.location.replace("/login")
         }
-        },[])
+        })
         return(
             <>
             <h1 className="title">MIS ORDENES</h1>

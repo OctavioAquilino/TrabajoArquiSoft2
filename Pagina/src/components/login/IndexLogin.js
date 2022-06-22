@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import {CookieUser} from "../cookies/cookieUser"
 const Cookie =new Cookies();
 export default function IndexLogin(){
+  
     const[user,setUser]= useState("");
     const[password,setPassword] = useState("");
   
@@ -37,7 +38,7 @@ export default function IndexLogin(){
         }
         return response.json()})
         .then(response => {
-            Cookie.set("user", response.id_user + "," + response.token+ ";", {path: "/"})
+            Cookie.set("user", response.id_user + "," + response.token, {path: "/"})
     })
    
     };

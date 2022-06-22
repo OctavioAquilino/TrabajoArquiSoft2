@@ -13,7 +13,6 @@ async function GetProductByIdCategory(id) {
    }
 
 export const CategoryLista =()=>{   
-    
     const [categorias,setCategorias] = useState([]);
     const fetchApi = async()=>{
     const response = await fetch('http://localhost:8090/category')

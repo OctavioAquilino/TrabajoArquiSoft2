@@ -10,8 +10,7 @@ const Cookie = new Cookies();
 let cookie = Cookie.get("user")
     let id_user;
     if(cookie!=undefined){
-    let a = cookie.split(";")
-    let array = a[0].split(",")
+    let array = cookie.split(",")
      id_user = array[0]
     }
     else{

@@ -1,10 +1,33 @@
 import React from "react"
 import Logo from "../../Imagenes/Logo1.png"
 import {Link} from "react-router-dom";
+import Cookies from "universal-cookie";
 
+function LogOut(){
+    var resultado = window.confirm('Estas seguro?');
+if (resultado === true) {
+    Cookie.set("user", "undefined,undefined", { path: "/" });
+    window.location.reload();
+} else { 
+    window.alert('Pareces indeciso');
+}
+}
 
+  
+const Cookie = new Cookies();
+    let cookie = Cookie.get("user")
+    let id_user;
+    if(cookie!=undefined){
+    let array = cookie.split(",")
+     id_user = array[0]
+    }
+    else{
+         id_user = "undefined"
+    }
 export const Header = ()=>{
     
+    
+
     return(
         <header>
         <Link to="/">
@@ -41,15 +64,22 @@ export const Header = ()=>{
                 MIS ORDENES
                 </Link> 
             </li>
+               
+                {id_user!="undefined"?
+                <button className="btn" onClick={()=>LogOut()}>
+                Log Out
+            </button>:
+
             <li>
                <Link to="/login" className="botones_menu">
                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-                LOG IN
+                Log In
                 </Link> 
             </li>
+            }
         </ul>
 
         <Link to="/cart">

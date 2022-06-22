@@ -77,6 +77,7 @@ function remove(n, p_id){
 
 
 function showProducts(products){
+  
   return products.map((product) =>
 
    <div className="producto">
