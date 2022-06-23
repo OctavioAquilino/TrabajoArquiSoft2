@@ -2,15 +2,28 @@ import React from "react"
 import Logo from "../../Imagenes/Logo1.png"
 import {Link} from "react-router-dom";
 import Cookies from "universal-cookie";
+import swal from "sweetalert2";
 
 function LogOut(){
-    var resultado = window.confirm('Estas seguro?');
-if (resultado === true) {
+    //var resultado = window.confirm('Estas seguro?');
+    swal.fire({
+        text: "Estas seguro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Cookie.set("user", "undefined,undefined", { path: "/" });
+            window.location.replace("/login");
+        }})
+/*if (resultado === true) {
     Cookie.set("user", "undefined,undefined", { path: "/" });
     window.location.reload();
 } else { 
-    window.alert('Pareces indeciso');
-}
+    window.swal('Pareces indeciso');
+}*/
 }
 
   

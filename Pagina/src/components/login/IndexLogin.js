@@ -3,7 +3,9 @@ import React,{ useState} from "react"
 import "./Prueba1.css"
 import Cookies from "universal-cookie";
 import {CookieUser} from "../cookies/cookieUser"
+import swal from "sweetalert2";
 const Cookie =new Cookies();
+
 export default function IndexLogin(){
   
     const[user,setUser]= useState("");
@@ -28,13 +30,22 @@ export default function IndexLogin(){
     const login = async()=>{
         fetch('http://localhost:8090/login',requestOptions)
         .then(response => {if (response.status == 400) {
-           alert("Datos incorrectos")
-           window.location.reload();
-           return response.json()
+           swal.fire({
+            text: "Datos incorrectos",
+            icon: 'error',
+           }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.reload();
+                return response.json()
+            }})
         }
         if(response.status==201){
-          window.location.replace("/")
-          return response.json()
+          swal.fire({icon: 'success'}
+          ).then((result) => {
+            if (result.isConfirmed) {
+              window.location.replace("/")
+              return response.json()
+            }})
         }
         return response.json()})
         .then(response => {

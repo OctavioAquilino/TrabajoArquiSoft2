@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { ProductoItem } from "./ProductoItem";
 import "bootstrap/dist/css/bootstrap.min.css";
+import swal from "sweetalert2";
 
 export const ProductosBuscador = ()=>{
 
@@ -18,8 +19,14 @@ export const ProductosBuscador = ()=>{
         const response = await fetch('http://localhost:8090/productText/'+busqueda)
         .then((response) => response.json());
         if (response.status == 400) {
-          alert("NO SE ENCONTRÓ DICHO PRODUCTO")
-          window.location.reload();
+          swal.fire({
+            icon: 'error',
+            text: "No se encontro el producto",
+          }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.reload();
+            }})
+          //window.location.reload();
        }else{
         
         setProductos(response)

@@ -1,6 +1,8 @@
 import React, {useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductoItem } from "../Productos/ProductoItem";
+import swal from "sweetalert2";
+
 
 async function GetProductByIdCategory(id) {
     return fetch('http://localhost:8090/productCategory/' +id, {
@@ -27,8 +29,11 @@ export const CategoryLista =()=>{
     async function Handle (id) {
     const response = await GetProductByIdCategory(id)
     if (response.status == 400) {
-      alert("NO HAY PRODUCTOS EN ESTA CATEGORIA")
-      window.location.reload();
+      swal.fire({
+        icon: 'error',
+        text: "No hay productos en esta categoria",
+      })
+      //window.location.reload();
    }else{
     setProductos(response)
     console.log(response);

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import { OrdenItem } from "./OrdenItem";
+import swal from "sweetalert2";
 
 
 const Cookie = new Cookies();
@@ -30,8 +31,10 @@ export const GetOrders = ()=>{
         async function Handle (id) {
             const response = await GetOrdersByIdUser(id)
             if (response.status == 400) {
-                alert("NO HA REALIZADO NINGUNA ORDEN")
-                
+                swal.fire({
+                    text: "No ha realizado ninguna orden",
+                    icon: 'warning'
+                })
              }else{
                 setOrdenes(response)
              }
@@ -42,8 +45,14 @@ export const GetOrders = ()=>{
         Handle(id_user);
         }
         else{
-            alert("Debe loguearse")
-            window.location.replace("/login")
+            swal.fire({
+                text: "Debe Loguearse",
+                icon: 'warning'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace("/login");
+                }})
+            
         }
         },[])
         return(

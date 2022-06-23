@@ -1,9 +1,10 @@
 import React from "react";
 import {addToCart} from "../cookies/add2car"
 import Cookies from "universal-cookie";
+import swal from "sweetalert";
 
 function notLogin(){
-    alert("Debe loguearse")
+    swal("Debe loguearse")
     window.location.replace("/login")
 }
 const Cookie = new Cookies();
