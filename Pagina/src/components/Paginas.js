@@ -14,7 +14,7 @@ export const Paginas = ()=>{
         <Route path="/productos" exact element={<ProductosLista/>} />
         <Route path="/login" exact element={<IndexLogin/>} />
         <Route path="/cart"  element={<Cart/>} />
-        <Route path="/order" exact element={<GetOrders/>} />
+        <Route path="/order" element={<GetOrders/>} />
         </Routes>  
         </section>
     )

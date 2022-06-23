@@ -16,6 +16,7 @@ async function GetOrdersByIdUser(id) {
       .then(data => data.json())
    }
 export const GetOrders = ()=>{
+    
     let cookie = Cookie.get("user")
     let id_user;
     if(cookie!=undefined){
@@ -44,7 +45,7 @@ export const GetOrders = ()=>{
             alert("Debe loguearse")
             window.location.replace("/login")
         }
-        })
+        },[])
         return(
             <>
             <h1 className="title">MIS ORDENES</h1>
