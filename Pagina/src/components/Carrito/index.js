@@ -1,9 +1,13 @@
 import React, { useState, List, Checkbox} from "react";
 import "./carrito.css"
 import Cookies from "universal-cookie";
-
+import { CrearOrden } from "../orden/crear_orden";
 const Cookie = new Cookies();
 
+function auxiliar(){
+
+  CrearOrden();
+  }
 
 async function getProductById(id){
   return fetch("http://127.0.0.1:8090/product/" + id, {
@@ -145,11 +149,11 @@ function Cart(){
       {cartProducts.length>=1 ? 
       <div className="pago">
         {renderOrderButton}
-        <button className="payment" /*onClick={LLAMO A LA FUNCION QUE GENERA LA ORDER}*/> Payment</button>
+        <button className="payment"  onClick={()=> auxiliar()}> Payment</button>
       </div>:
       <div><h2>Tu Carrito esta vacio</h2></div>
-      }
-      </div>
+}
+</div>
   );
 }
 

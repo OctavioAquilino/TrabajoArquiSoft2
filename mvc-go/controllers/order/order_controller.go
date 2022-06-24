@@ -4,7 +4,6 @@ import (
 	"mvc-go/dto"
 	service "mvc-go/services"
 	"net/http"
-	"strconv"
 
 	//"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -36,12 +35,12 @@ func OrderInsert(c *gin.Context) {
 
 func GetOrdersByIdUser(c *gin.Context) {
 	log.Debug("Order id to load: " + c.Param("idUser"))
-//validar si el token sea valido
+	//validar si el token sea valido
 
-	idUser, _ := strconv.Atoi(c.Param("idUser")) //se pasa el id de array a int
+	//idUser, _ := strconv.Atoi(c.Param("idUser")) //se pasa el id de array a int
 	var ordersDto dto.OrdersDto
-
-	ordersDto, err := service.OrderService.GetOrdersByIdUser(idUser) //delega el trabajo al service
+	token := c.Param("idUser")
+	ordersDto, err := service.OrderService.GetOrdersByIdUser(token) //delega el trabajo al service
 
 	if err != nil {
 		c.JSON(err.Status(), err)

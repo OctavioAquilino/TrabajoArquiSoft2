@@ -20,9 +20,11 @@ export const GetOrders = ()=>{
     
     let cookie = Cookie.get("user")
     let id_user;
+    let token;
     if(cookie!=undefined){
     let array = cookie.split(",")
      id_user = array[0]
+     token=array[1]
     }
     else{
          id_user = "undefined"
@@ -42,7 +44,7 @@ export const GetOrders = ()=>{
             };
     useEffect(()=>{
         if(id_user!="undefined"){
-        Handle(id_user);
+        Handle(token);
         }
         else{
             swal.fire({

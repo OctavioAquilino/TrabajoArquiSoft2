@@ -60,11 +60,13 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError
 	}
 
 	if user.Password == loginDto.Password {
-		token := jwt.New(jwt.SigningMethodHS256)
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+			"id_user": user.Id,
+		})
 		tokenString, _ := token.SignedString(jwtKey)
 		tokenDto.Token = tokenString
 		tokenDto.IdUser = user.Id
-
+		log.Debug(tokenDto.Token)
 		return tokenDto, nil
 	} else {
 		return tokenDto, e.NewBadRequestApiError("contraseña incorrecta")

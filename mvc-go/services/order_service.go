@@ -3,7 +3,6 @@ package services
 //lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
 //Se puede reutilizar
 import (
-	_ "fmt"
 	orderCliente "mvc-go/clients/order" //DAO
 	orderDetailCliente "mvc-go/clients/order_detail"
 	productCliente "mvc-go/clients/product"
@@ -11,6 +10,8 @@ import (
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 	//"mvc-go/utils/modeladto"
 )
 
@@ -18,7 +19,7 @@ type orderService struct{}
 
 type orderServiceInterface interface {
 	InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiError)
-	GetOrdersByIdUser(idUser int) (dto.OrdersDto, e.ApiError)
+	GetOrdersByIdUser(token string) (dto.OrdersDto, e.ApiError)
 }
 
 var (
@@ -93,9 +94,30 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 //Buscar orden por IDuser
 
-func (s *orderService) GetOrdersByIdUser(idUser int) (dto.OrdersDto, e.ApiError) {
+func (s *orderService) GetOrdersByIdUser(token string) (dto.OrdersDto, e.ApiError) {
+	var idUser float64
+	tkn, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
 
-	var orders model.Orders = orderCliente.GetOrdersByIdUser(idUser) //objeto de la DB, a traves del DAO
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			return nil, e.NewUnauthorizedApiError("Unauthorized")
+		}
+		return nil, e.NewUnauthorizedApiError("Unauthorized")
+	}
+
+	if !tkn.Valid {
+		return nil, e.NewUnauthorizedApiError("Unauthorized")
+
+	}
+	if claims, ok := tkn.Claims.(jwt.MapClaims); ok && tkn.Valid {
+
+		idUser = (claims["id_user"].(float64))
+
+	} else {
+		return nil, e.NewUnauthorizedApiError("Unauthorized")
+	}
+	var IdUserX int = int(idUser)
+	var orders model.Orders = orderCliente.GetOrdersByIdUser(IdUserX) //objeto de la DB, a traves del DAO
 	var ordersDto dto.OrdersDto
 
 	if len(orders) == 0 {

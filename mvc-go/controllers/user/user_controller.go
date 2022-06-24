@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/dgrijalva/jwt-go"
+	_ "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
@@ -51,20 +51,6 @@ func UserLogin(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, errorDto)
 		return
 	}*/
-	tkn, err := jwt.Parse(tokenDto.Token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
-	if err != nil {
-		if err == jwt.ErrSignatureInvalid {
-			c.JSON(http.StatusUnauthorized, "Invalid Signature")
-			return
-		}
-		c.JSON(http.StatusBadRequest, "Bad request")
-		return
-	} ///esto deberia estar en el service
-
-	if !tkn.Valid {
-		c.JSON(http.StatusUnauthorized, "Invalid token")
-		return
-	} // ver q onda
 
 	c.JSON(http.StatusCreated, tokenDto)
 
