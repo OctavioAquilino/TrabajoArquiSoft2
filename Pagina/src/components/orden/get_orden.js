@@ -36,7 +36,13 @@ export const GetOrders = ()=>{
                 swal.fire({
                     text: "No ha realizado ninguna orden",
                     icon: 'warning'
+                   
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        window.location.replace("/")
+                    }
                 })
+                
              }else{
                 setOrdenes(response)
              }

@@ -1,16 +1,14 @@
-BD
-Para users:
 
 INSERT INTO users VALUES
 (1,"Nicolas","Rojo","NicoRed","12345nr",351489),
 (2,"Octavio","Aquilino","TayiAqui","12345oa",351258),
 (3,"Santiago","Riveros","SantiRiv","12345sr",351159);
 
-para addresses:
+
 
 ALTER TABLE addresses 
 ADD CONSTRAINT fk_addr_us FOREIGN KEY(id_user)
-REFERENCES users (id)
+REFERENCES users (id);
 
 INSERT INTO addresses VALUES
 (1,"Cordoba","Centro","Lionel Messi",159,1),
@@ -20,7 +18,7 @@ INSERT INTO addresses VALUES
 (null,"Cordoba","Nueva Cordoba","Chacabuco",757,2),
 (null,"Cordoba","Centro","Chacabuco",53,3);
 
-para categories:
+
 
 INSERT INTO categories VALUES
 (1,"Celulares","Aquí encontrarás los mejores productos y al mejor precio"),
@@ -30,17 +28,16 @@ INSERT INTO categories VALUES
 (5,"Videojuegos","Aquí encontrarás los mejores productos y al mejor precio"),
 (6,"Electrodomesticos","Aquí encontrarás los mejores productos y al mejor precio"),
 (7,"Electronicos y Audio","Aquí encontrarás los mejores productos y al mejor precio"),
-(8,"Computacion","Aquí encontrarás los mejores productos y al mejor precio");
+(8,"Computacion","Aquí encontrarás los mejores productos y al mejor precio"),
 (9,"Deco","Aquí encontrarás los mejores productos y al mejor precio"),
 (10,"Vehiculos","Aquí encontrarás los mejores productos y al mejor precio"),
 (11,"Libros","Aquí encontrarás los mejores productos y al mejor precio"),
 (12,"Perfumes","Aquí encontrarás los mejores productos y al mejor precio");
 
-para products:
 
 ALTER TABLE products 
 ADD CONSTRAINT fk_prod_cat FOREIGN KEY(id_category)
-REFERENCES categories(id)
+REFERENCES categories(id);
 
 INSERT INTO products VALUES
 (1,"Samsung Galaxy S22",800,"https://images.samsung.com/is/image/samsung/p6pim/es/2202/gallery/es-galaxy-s22-plus-s906-sm-s906blbgeub-530863207?$650_519_PNG$",8,1,"128gb,color celeste"),
@@ -197,7 +194,7 @@ INSERT INTO products VALUES
 (null,"Camiseta de Instituto",125.78,"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTWkkhc9c3gtF3gMYP37M5U-7DhgQtrP9rLVXnBOtYOYeHwrfxNVl6IkPHObDeMOELGWx4JRI5H0jsacFQ5FZhRNU7Tn1dJUOl3cZ7d2rm88PiCnd3GuqNA&usqp=CAE",14,2,"Remera oficial de Instituto - 10"),
 (null,"Camiseta de Belgrano",100.99,"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/672/177/products/11-390d1d3db640131a9f16444336011611-480-0.png",7,2,"Remera oficial de Belgrano - 10"),
 (null,"Camiseta de Talleres",109.99,"https://i0.wp.com/tienda.clubtalleres.com.ar/wp-content/uploads/2022/02/titular-frente-copia-2.jpg?fit=1200%2C1200&ssl=1",19,2,"Remera oficial de Talleres - 9"),
-(null,"Camiseta de Estudiantes de Rio Cuarto",109.99,"https://http2.mlstatic.com/D_NQ_NP_717938-MLA47548433058_092021-O.jpg",19,2,"Remera oficial de Estudiantes de Rio Cuarto - 9")
+(null,"Camiseta de Estudiantes de Rio Cuarto",109.99,"https://http2.mlstatic.com/D_NQ_NP_717938-MLA47548433058_092021-O.jpg",19,2,"Remera oficial de Estudiantes de Rio Cuarto - 9"),
 (null ,"iPad Pro 12.9‑inch (5th generation)",1099,"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-cell-spacegray-202104?wid=470&hei=556&fmt=p-jpg&qlt=95&.v=1617126613000",12,8,"M1 chip with next-generation Neural Engine, color Space Gray, 256gb"),
 (null ,"iPad Pro 12.9‑inch (5th generation)",1299,"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-cell-silver-202104?wid=470&hei=556&fmt=p-jpg&qlt=95&.v=1617126601000",15,8,"M1 chip with next-generation Neural Engine, color Silver, 512gb"),
 (null ,"iPad Air (5th generation)",825,"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-air-select-wifi-spacegray-202203?wid=470&hei=556&fmt=png-alpha&.v=1645066742664",10,8,"M1 chip with next-generation Neural Engine, color Space Gray, 256gb"),
@@ -222,15 +219,14 @@ INSERT INTO products VALUES
 (null ,"HomePod mini",99.99,"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/homepod-mini-select-yellow-202110_FV1?wid=934&hei=440&fmt=jpeg&qlt=95&.v=1633086026000",5,7,"Sonido que llena la sala. El asistente perfecto. Control de toda tu casa. Se lleva de maravilla con el iPhone. Privacidad y seguridad, color Yellow"),
 (null ,"HomePod mini",99.99,"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/homepod-mini-select-orange-202110_FV1?wid=934&hei=440&fmt=jpeg&qlt=95&.v=1633086020000",9,7,"Sonido que llena la sala. El asistente perfecto. Control de toda tu casa. Se lleva de maravilla con el iPhone. Privacidad y seguridad, color Orange"),
 (null,"Cocina Gourmet Inox multigas 4 hornallas puerta con visor 91L",642,"https://images.precialo.com/products/cocina-ormay-gourmet-inox-multigas-4-hornallas-negra-mate-puerta-con-visor-91l/834ab085-5bdd-4011-8ff7-bf97d0eda73b.jpeg",15,6,"negra mate - Ormay"),
-(null,"Cocina Gourmet Inox multigas 4 hornallas puerta con visor 91L",650,"https://http2.mlstatic.com/D_NQ_NP_626181-MLA50161119835_062022-O.jpg",12,6,"gris acero - Ormay"),
+(null,"Cocina Gourmet Inox multigas 4 hornallas puerta con visor 91L",650,"https://http2.mlstatic.com/D_NQ_NP_626181-MLA50161119835_062022-O.jpg",12,6,"gris acero - Ormay");
 
-Para Orders:
+
 
 ALTER TABLE orders
 ADD CONSTRAINT fk_order_us FOREIGN KEY(id_user) 
 REFERENCES users(id);
 
-Para Order_details:
 
 ALTER TABLE order_details
 ADD CONSTRAINT fk_order_det_prod FOREIGN KEY(id_product) 
