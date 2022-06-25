@@ -1,38 +1,23 @@
 
 INSERT INTO users VALUES
-(1,"Nicolas","Rojo","NicoRed","67a24c14b19206fec22a318c8b6e7616",351489),
-(2,"Octavio","Aquilino","TayiAqui","699b79976a6310009b7ec649fd654a16",351258),
-(3,"Santiago","Riveros","SantiRiv","0e13e726197867bd8cfc7265c2e89ad8",351159);
-
-
-
-ALTER TABLE addresses 
-ADD CONSTRAINT fk_addr_us FOREIGN KEY(id_user)
-REFERENCES users (id);
-
-INSERT INTO addresses VALUES
-(1,"Cordoba","Centro","Lionel Messi",159,1),
-(2,"La Rioja","Centro","Sergio Aguero",743,2),
-(3,"Dean Funes","Centro","Angel Di Maria",258,3),
-(null,"Cordoba","Villa Cabrera","Italia",2139,1),
-(null,"Cordoba","Nueva Cordoba","Chacabuco",757,2),
-(null,"Cordoba","Centro","Chacabuco",53,3);
-
+(1,"Nicolas","Rojo","NicoRed","67a24c14b19206fec22a318c8b6e7616","Italia 2139 Villa Cabrera, Cordoba"),
+(2,"Octavio","Aquilino","TayiAqui","699b79976a6310009b7ec649fd654a16","Santiago del Estero 288 Centro, La Rioja"),
+(3,"Santiago","Riveros","SantiRiv","0e13e726197867bd8cfc7265c2e89ad8","Chacabuco 757 Nueva Cordoba, Cordoba");
 
 
 INSERT INTO categories VALUES
-(1,"Celulares","Aquí encontrarás los mejores productos y al mejor precio"),
-(2,"Deporte y Fitness","Aquí encontrarás los mejores productos y al mejor precio"),
-(3,"Televisores","Aquí encontrarás los mejores productos y al mejor precio"),
-(4,"Indumentaria","Aquí encontrarás los mejores productos y al mejor precio"),
-(5,"Videojuegos","Aquí encontrarás los mejores productos y al mejor precio"),
-(6,"Electrodomesticos","Aquí encontrarás los mejores productos y al mejor precio"),
-(7,"Electronicos y Audio","Aquí encontrarás los mejores productos y al mejor precio"),
-(8,"Computacion","Aquí encontrarás los mejores productos y al mejor precio"),
-(9,"Deco","Aquí encontrarás los mejores productos y al mejor precio"),
-(10,"Vehiculos","Aquí encontrarás los mejores productos y al mejor precio"),
-(11,"Libros","Aquí encontrarás los mejores productos y al mejor precio"),
-(12,"Perfumes","Aquí encontrarás los mejores productos y al mejor precio");
+(1,"Celulares"),
+(2,"Deporte y Fitness"),
+(3,"Televisores"),
+(4,"Indumentaria"),
+(5,"Videojuegos"),
+(6,"Electrodomesticos"),
+(7,"Electronicos y Audio"),
+(8,"Computacion"),
+(9,"Deco"),
+(10,"Vehiculos"),
+(11,"Libros"),
+(12,"Perfumes");
 
 
 ALTER TABLE products 
