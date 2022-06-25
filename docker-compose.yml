@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  mysql:
+  dbmysql:
     build: ./db
     environment:
       MYSQL_DATABASE: trabajoarqui
@@ -11,20 +11,20 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", ""]
       timeout: 20s
       retries: 10
   frontend:
     build: ./Pagina
     depends_on:
-      mysql:
+      dbmysql:
         condition: service_healthy
     ports:
       - "3000:3000"
   backend:
     build: ./mvc-go
     depends_on:
-      mysql:
+      dbmysql:
         condition: service_healthy
     ports:
       - "8090:8090"

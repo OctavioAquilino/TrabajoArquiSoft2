@@ -14,4 +14,4 @@ ENTRYPOINT ["/mvc-go"]
 # opcion 2 el expose con el cmd
 #EXPOSE 8090
 
-#CMD ["go", "run","main.go"]
+#CMD ["go","run","main.go"]

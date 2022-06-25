@@ -1,3 +1,3 @@
 FROM mysql:8
 
-ADD trabajoarqui.sql /docker-entrypoint-initdb.d
+ADD db.sql /docker-entrypoint-initdb.d
