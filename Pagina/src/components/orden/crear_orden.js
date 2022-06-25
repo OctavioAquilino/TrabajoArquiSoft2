@@ -44,7 +44,7 @@ export const CrearOrden = ()=>{
             return response.json()
           }}) 
        }else{
-          swal.fire({icon: 'success', text:"Compra realizada con éxito, puede ver su historial de compras en mis ordenes"}
+          swal.fire({icon: 'success', text:"Compra realizada con éxito, puede ver su historial de compras en mis compras"}
           ).then((result) => {
             if (result.isConfirmed) {
               window.location.replace("/")

@@ -65,7 +65,7 @@ export const GetOrders = ()=>{
         },[])
         return(
             <>
-            <h1 className="title">MIS ORDENES</h1>
+            <h1 className="title">MIS COMPRAS</h1>
             <div>
                 <div className="ordenes">
             

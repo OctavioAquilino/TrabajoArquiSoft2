@@ -74,7 +74,7 @@ export const Header = ()=>{
                 <span></span>
                 <span></span>
                 <span></span>
-                MIS ORDENES
+                MIS COMPRAS
                 </Link> 
             </li>
                

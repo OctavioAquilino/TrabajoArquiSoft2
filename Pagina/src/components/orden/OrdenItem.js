@@ -9,9 +9,24 @@ export const OrdenItem =(
 })=>{
 //poner la tabla
     return(
-      <div>
+      <div className="ordenes">
         <div className="orden">
-        <table>
+          <table>
+         <thead>
+           <tr>
+             <th>Monto Final</th>
+             <th>Fecha</th>
+           </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>{monto_final}</td>
+               <td>{fecha}</td>
+             </tr>
+         </tbody>
+       </table>
+       <h2>Detalle de la compra</h2>
+       <table>
         <thead>
            <tr>
              <th>Producto</th>
@@ -31,20 +46,6 @@ export const OrdenItem =(
               </tr>
                 ))
            }
-         </tbody>
-       </table>
-          <table>
-         <thead>
-           <tr>
-             <th>Monto Final</th>
-             <th>Fecha</th>
-           </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td>{monto_final}</td>
-               <td>{fecha}</td>
-             </tr>
          </tbody>
        </table>
        <br></br>
