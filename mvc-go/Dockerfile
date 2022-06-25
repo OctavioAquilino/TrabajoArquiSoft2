@@ -9,7 +9,7 @@ RUN go build -o mvc-go .
 RUN chmod +x /mvc-go
 
 # opcion 1 el entrypoint
-ENTRYPOINT ["/mvc"]
+ENTRYPOINT ["/mvc-go"]
 
 # opcion 2 el expose con el cmd
 #EXPOSE 8090
