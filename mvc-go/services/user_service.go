@@ -44,7 +44,7 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 	userDto.LastName = user.LastName
 	userDto.UserName = user.UserName
 	userDto.Password = user.Password
-	userDto.Phone = user.Phone
+	userDto.Address = user.Address
 	userDto.Id = user.Id
 	return userDto, nil
 }

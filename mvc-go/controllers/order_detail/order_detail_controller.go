@@ -15,7 +15,7 @@ func GetOrderDetailByIdOrder(c *gin.Context) {
 	log.Debug("OrderDetail id to load: " + c.Param("idOrder"))
 
 	idOrder, _ := strconv.Atoi(c.Param("idOrder")) //se pasa el id de array a int
-	var orderDetailResDto dto.OrderDetailsResDto
+	var orderDetailResDto dto.OrderDetailsDto
 
 	orderDetailResDto, err := service.OrderDetailService.GetOrderDetailByIdOrder(idOrder) //delega el trabajo al service
 

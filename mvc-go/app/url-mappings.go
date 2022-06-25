@@ -1,7 +1,6 @@
 package app
 
 import (
-	addressController "mvc-go/controllers/address"
 	categoryController "mvc-go/controllers/category"
 	orderController "mvc-go/controllers/order"
 	orderDetailController "mvc-go/controllers/order_detail"
@@ -27,9 +26,6 @@ func mapUrls() {
 	router.GET("/productCategory/:idCategory", productController.GetProductsByIdCategory)
 
 	router.GET("/productText/:texto", productController.GetProductsByText)
-
-	//Address Mapping
-	router.GET("/addressUser/:idUser", addressController.GetAddressByIdUser)
 
 	//Category Mapping
 	router.GET("/category", categoryController.GetCategories)

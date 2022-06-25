@@ -32,7 +32,6 @@ func (s *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {
 	}
 	for _, category := range categories {
 		var categoryDto dto.CategoryDto
-		categoryDto.Descripcion = category.Description
 		categoryDto.IdCategory = category.Id
 		categoryDto.Nombre = category.Name
 

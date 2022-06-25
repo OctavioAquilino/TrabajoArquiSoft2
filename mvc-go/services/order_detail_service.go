@@ -14,7 +14,7 @@ type orderDetailService struct{}
 type orderDetailServiceInterface interface {
 	//siempre devuelve dto o error
 
-	GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsResDto, e.ApiError)
+	GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsDto, e.ApiError)
 }
 
 var (
@@ -25,23 +25,23 @@ func init() {
 	OrderDetailService = &orderDetailService{}
 }
 
-func (s *orderDetailService) GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsResDto, e.ApiError) {
+func (s *orderDetailService) GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsDto, e.ApiError) {
 
-	var ordersDetail model.OrderDetails = orderDetailCliente.GetOrderDetailByIdOrder(idOrder) //objeto de la DB, a traves del DAO
-	var ordersDetailResDto dto.OrderDetailsResDto
+	var ordersDetail model.OrderDetails = orderDetailCliente.GetOrderDetailByIdOrder(idOrder)
+	var ordersDetailResDto dto.OrderDetailsDto
 
 	if len(ordersDetail) == 0 {
 		return ordersDetailResDto, e.NewBadRequestApiError("orderDetail not found")
 	}
 	for _, orderDetailRes := range ordersDetail {
-		var orderDetailResDto dto.OrderDetailResDto
+		var orderDetailResDto dto.OrderDetailDto
 		orderDetailResDto.Id = orderDetailRes.Id
 		orderDetailResDto.Nombre = orderDetailRes.Nombre
 		orderDetailResDto.Cantidad = orderDetailRes.Cantidad
 		orderDetailResDto.PrecioUnitario = orderDetailRes.PrecioUnitario
 		orderDetailResDto.Total = orderDetailRes.Total
 		orderDetailResDto.IdProducto = orderDetailRes.IdProduct
-
+		orderDetailResDto.IdOrder = orderDetailRes.IdOrder
 		ordersDetailResDto = append(ordersDetailResDto, orderDetailResDto)
 	}
 	return ordersDetailResDto, nil
