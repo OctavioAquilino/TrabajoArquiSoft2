@@ -1,8 +1,8 @@
 
 INSERT INTO users VALUES
-(1,"Nicolas","Rojo","NicoRed","12345nr",351489),
-(2,"Octavio","Aquilino","TayiAqui","12345oa",351258),
-(3,"Santiago","Riveros","SantiRiv","12345sr",351159);
+(1,"Nicolas","Rojo","NicoRed","67a24c14b19206fec22a318c8b6e7616",351489),
+(2,"Octavio","Aquilino","TayiAqui","699b79976a6310009b7ec649fd654a16",351258),
+(3,"Santiago","Riveros","SantiRiv","0e13e726197867bd8cfc7265c2e89ad8",351159);
 
 
 

@@ -8,6 +8,10 @@ import (
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
 
+	"crypto/md5"
+
+	"encoding/hex"
+
 	"github.com/dgrijalva/jwt-go"
 	log "github.com/sirupsen/logrus"
 )
@@ -49,24 +53,27 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 var jwtKey = []byte("secret_key")
 
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
-	//var user model.User
+
 	log.Debug(loginDto)
-	var user model.User = userCliente.GetUserByUserName(loginDto.UserName) //objeto de la DB, a traves del DAO
-	//var userDto dto.UserDto
+	var user model.User = userCliente.GetUserByUserName(loginDto.UserName)
+
 	var tokenDto dto.TokenDto
 
 	if user.Id == 0 {
 		return tokenDto, e.NewBadRequestApiError("user not found")
 	}
 
-	if user.Password == loginDto.Password {
+	var pswMd5 = md5.Sum([]byte(loginDto.Password))
+	pswMd5String := hex.EncodeToString(pswMd5[:])
+
+	if pswMd5String == user.Password {
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"id_user": user.Id,
 		})
 		tokenString, _ := token.SignedString(jwtKey)
 		tokenDto.Token = tokenString
 		tokenDto.IdUser = user.Id
-		log.Debug(tokenDto.Token)
+
 		return tokenDto, nil
 	} else {
 		return tokenDto, e.NewBadRequestApiError("contraseña incorrecta")
