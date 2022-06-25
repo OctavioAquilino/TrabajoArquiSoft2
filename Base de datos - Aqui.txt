@@ -2,7 +2,7 @@
 INSERT INTO users VALUES
 (1,"Nicolas","Rojo","NicoRed","67a24c14b19206fec22a318c8b6e7616","Italia 2139 Villa Cabrera, Cordoba"),
 (2,"Octavio","Aquilino","TayiAqui","699b79976a6310009b7ec649fd654a16","Santiago del Estero 288 Centro, La Rioja"),
-(3,"Santiago","Riveros","SantiRiv","0e13e726197867bd8cfc7265c2e89ad8","Chacabuco 757 Nueva Cordoba, Cordoba");
+(3,"Santiago","Riveros","SantiRiv","0e13e726197867bd8cfc7265c2e89ad8","Chacabuco 53 Centro, Cordoba");
 
 
 INSERT INTO categories VALUES

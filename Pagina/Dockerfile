@@ -2,11 +2,15 @@ FROM node:16
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY package.json .
+COPY package-lock.json .
 
 RUN npm install
 
-COPY /public ./
-COPY /src ./
+COPY . .
 
-CMD ["node","src/App.js"]
+RUN npm run build 
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
