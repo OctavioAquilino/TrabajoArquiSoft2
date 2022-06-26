@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  dbmysql:
-    build: ./db
+  database:
+    build: ./DataBase
     environment:
       MYSQL_DATABASE: trabajoarqui
       MYSQL_ALLOW_EMPTY_PASSWORD: true
@@ -14,17 +14,18 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
       timeout: 20s
       retries: 10
-  frontend:
+  front:
     build: ./Pagina
     depends_on:
-      dbmysql:
+      database:
         condition: service_healthy
     ports:
       - "3000:3000"
-  backend:
+  back:
     build: ./mvc-go
+    restart: on-failure
     depends_on:
-      dbmysql:
+      database:
         condition: service_healthy
     ports:
       - "8090:8090"

@@ -26,7 +26,7 @@ func init() {
 	DBUser := "root"
 	DBPass := ""
 	//DBPass := os.Getenv("MVC_DB_PASS")
-	DBHost := "127.0.0.1" //127001
+	DBHost := "database"
 	// ------------------------
 
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True") //ver puerto

@@ -10,7 +10,7 @@ function auxiliar(){
   }
 
 async function getProductById(id){
-  return fetch("http://127.0.0.1:8090/product/" + id, {
+  return fetch("http://localhost:8090/product/" + id, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
