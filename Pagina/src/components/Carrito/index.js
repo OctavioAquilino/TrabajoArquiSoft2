@@ -1,8 +1,23 @@
-import React, { useState, List, Checkbox} from "react";
+import React, { useState, useEffect, List, Checkbox} from "react";
 import "./carrito.css"
 import Cookies from "universal-cookie";
 import { CrearOrden } from "../orden/crear_orden";
 const Cookie = new Cookies();
+
+const id_user = setUser()
+
+function setUser (){
+  let cookieUser = Cookie.get("user")
+
+  if(cookieUser!=undefined){
+  let array = cookieUser.split(",")
+  return array[0]
+  }else{
+    return "undefined"
+  }
+ 
+  
+}
 
 function auxiliar(){
 
@@ -20,9 +35,11 @@ async function getProductById(id){
 
 
 
+
 async function getCartProducts(){
+ 
   let items = []
-  let a = Cookie.get("cart").split(";")
+  let a = Cookie.get("cart"+id_user).split(";")
 
   for (let i = 0; i < a.length; i++){
     let item = a[i];
@@ -50,7 +67,8 @@ function getOptions(n){
 }
 
 function remove(n, p_id){
-  let cookie = Cookie.get("cart");
+
+  let cookie = Cookie.get("cart"+id_user);
   let newCookie = ""
   let toCompare = cookie.split(";")
   let isEmpty = false
@@ -74,7 +92,7 @@ function remove(n, p_id){
     }
   });
   cookie = newCookie
-  Cookie.set("cart", cookie, {path: "/"})
+  Cookie.set("cart"+id_user, cookie, {path: "/"})
   window.location.reload()
   return
 }
@@ -125,13 +143,26 @@ async function setCart(setter, setterTotal){
 function Cart(){
   const [cartProducts, setCartProducts] = useState([]);
   const [total, setTotal] = useState(0);
-
+ // const [id_user, setUser] = useState("")
+  /*
+  let cookieUser = Cookie.get("user")
+  
+  let token = "undefined";
+  if(cookieUser!=undefined){
+  let array = cookieUser.split(",")
+   setUser(array[0])
+   token=array[1]
+  }
+  else{
+       setUser("undefined")
+  }
+   */
 
   if (cartProducts.length <= 0 ){
     setCart(setCartProducts, setTotal)
   }
 
- 
+  
 
   const renderOrderButton = (
     <div className="emptySpace">
@@ -143,7 +174,7 @@ function Cart(){
     <div>
       <h1 className="title"> TU CARRITO</h1>
       <div className="productos">
-        {Cookie.get("cart") ? showProducts(cartProducts) : <a></a>}
+        {Cookie.get("cart"+id_user) ? showProducts(cartProducts) : <a></a>}
       </div>
       
       {cartProducts.length>=1 ? 

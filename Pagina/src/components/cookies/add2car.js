@@ -2,11 +2,21 @@ import Cookies from "universal-cookie";
 
 const Cookie= new Cookies()
 export function addToCart(id){
-  
-    let cookie = Cookie.get("cart");
+  let cookieUser = Cookie.get("user")
+  let id_user;
+  let token;
+  if(cookieUser!=undefined){
+  let array = cookieUser.split(",")
+   id_user = array[0]
+   token=array[1]
+  }
+  else{
+       id_user = "undefined"
+  }
+    let cookie = Cookie.get("cart"+id_user);
    
     if(cookie == undefined){
-      Cookie.set("cart", id + ",1;", {path: "/"});
+      Cookie.set("cart"+id_user, id + ",1;", {path: "/"});
      
       return
     }
@@ -32,7 +42,7 @@ export function addToCart(id){
       total += 1;
     }
     cookie = newCookie
-    Cookie.set("cart", cookie, {path: "/"})
+    Cookie.set("cart"+id_user, cookie, {path: "/"})
    
     return
   }

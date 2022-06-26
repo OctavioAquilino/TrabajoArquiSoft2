@@ -4,10 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import swal from "sweetalert2";
 const Cookie = new Cookies();
+const id_user = setUser()
 
+function setUser (){
+  let cookieUser = Cookie.get("user")
+
+  if(cookieUser!=undefined){
+  let array = cookieUser.split(",")
+  return array[0]
+  }else{
+    return "undefined"
+  }
+}
 function vaciarCarrito(){
    
-    document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "cart"+id_user+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 export const CrearOrden = ()=>{
   
@@ -17,7 +28,7 @@ export const CrearOrden = ()=>{
     let orderDetail ={'id_product':0,'cantidad':0}
     let ordersDetail = [];
 
-    let a = Cookie.get("cart").split(";")
+    let a = Cookie.get("cart"+id_user).split(";")
  
 
     for (let i = 0; i < a.length; i++){
