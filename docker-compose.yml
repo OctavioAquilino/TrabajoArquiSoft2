@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  database:
-    build: ./DataBase
+  localhost:
+    build: ./db
     environment:
       MYSQL_DATABASE: trabajoarqui
       MYSQL_ALLOW_EMPTY_PASSWORD: true
@@ -17,7 +17,7 @@ services:
   front:
     build: ./Pagina
     depends_on:
-      database:
+      localhost:
         condition: service_healthy
     ports:
       - "3000:3000"
@@ -25,7 +25,7 @@ services:
     build: ./mvc-go
     restart: on-failure
     depends_on:
-      database:
+      localhost:
         condition: service_healthy
     ports:
       - "8090:8090"
