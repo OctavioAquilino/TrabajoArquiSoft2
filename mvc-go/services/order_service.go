@@ -1,9 +1,7 @@
 package services
 
-//lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
-//Se puede reutilizar
 import (
-	orderCliente "mvc-go/clients/order" //DAO
+	orderCliente "mvc-go/clients/order"
 	orderDetailCliente "mvc-go/clients/order_detail"
 	productCliente "mvc-go/clients/product"
 	"mvc-go/dto"
@@ -12,7 +10,6 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	//"mvc-go/utils/modeladto"
 )
 
 type orderService struct{}
@@ -66,7 +63,6 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 	order.MontoFinal = orderCliente.UpdateMontoFinal(montofinal, order.Id)
 
 	ordersDetail = orderDetailCliente.InsertOrdersDetail(ordersDetail)
-	// cargado de la order response
 
 	var orderResponseDto dto.OrderDto
 
@@ -117,7 +113,7 @@ func (s *orderService) GetOrdersByIdUser(token string) (dto.OrdersDto, e.ApiErro
 		return nil, e.NewUnauthorizedApiError("Unauthorized")
 	}
 	var IdUserX int = int(idUser)
-	var orders model.Orders = orderCliente.GetOrdersByIdUser(IdUserX) //objeto de la DB, a traves del DAO
+	var orders model.Orders = orderCliente.GetOrdersByIdUser(IdUserX)
 	var ordersDto dto.OrdersDto
 
 	if len(orders) == 0 {

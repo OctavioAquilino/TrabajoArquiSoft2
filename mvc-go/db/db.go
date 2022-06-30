@@ -21,13 +21,10 @@ var (
 )
 
 func init() {
-	// DB Connections Paramters
 	DBName := "trabajoarqui"
 	DBUser := "root"
 	DBPass := ""
-	//DBPass := os.Getenv("MVC_DB_PASS")
-	//DBHost := "database"
-	DBHost := "localhost"
+	DBHost := "database"
 	// ------------------------
 
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True") //ver puerto
@@ -39,7 +36,6 @@ func init() {
 		log.Info("Connection Established")
 	}
 
-	// We need to add all CLients that we build
 	userClient.Db = db
 	productClient.Db = db
 	categoryClient.Db = db
@@ -48,8 +44,7 @@ func init() {
 }
 
 func StartDbEngine() {
-	// We need to migrate all classes model.
-	db.AutoMigrate(&model.User{}) //se debe agreagar por cada carpeta del model
+	db.AutoMigrate(&model.User{})
 	db.AutoMigrate(&model.Product{})
 	db.AutoMigrate(&model.Category{})
 	db.AutoMigrate(&model.OrderDetail{})

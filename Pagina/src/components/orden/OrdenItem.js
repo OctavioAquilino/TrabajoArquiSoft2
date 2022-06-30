@@ -1,5 +1,5 @@
 import React from "react";
-import { OrdenDetalleItem } from "./OrdenDetalleItem";
+
 export const OrdenItem =(
     {id_order,
         monto_final,
@@ -7,7 +7,6 @@ export const OrdenItem =(
         id_user,
         OrdersDetalle
 })=>{
-//poner la tabla
     return(
       <div className="ordenes">
         <div className="orden">

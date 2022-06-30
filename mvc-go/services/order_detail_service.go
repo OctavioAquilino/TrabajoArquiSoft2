@@ -1,7 +1,5 @@
 package services
 
-//lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
-//Se puede reutilizar
 import (
 	orderDetailCliente "mvc-go/clients/order_detail" //DAO
 	"mvc-go/dto"
@@ -12,8 +10,6 @@ import (
 type orderDetailService struct{}
 
 type orderDetailServiceInterface interface {
-	//siempre devuelve dto o error
-
 	GetOrderDetailByIdOrder(idOrder int) (dto.OrderDetailsDto, e.ApiError)
 }
 

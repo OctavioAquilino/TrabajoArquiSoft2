@@ -12,7 +12,7 @@ var Db *gorm.DB
 
 func GetCategories() model.Categories {
 	var categories model.Categories
-	Db.Find(&categories) //busca y guarda todo en categories
+	Db.Find(&categories)
 
 	log.Debug("Categories: ", categories)
 

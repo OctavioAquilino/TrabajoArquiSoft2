@@ -6,14 +6,12 @@ import (
 	"net/http"
 	_ "strconv"
 
-	//"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	//log "github.com/sirupsen/logrus"
 )
 
 func GetCategories(c *gin.Context) {
 	var categoriesDto dto.CategoriesDto
-	categoriesDto, err := service.CategoryService.GetCategories() //delega
+	categoriesDto, err := service.CategoryService.GetCategories()
 
 	if err != nil {
 		c.JSON(err.Status(), err)

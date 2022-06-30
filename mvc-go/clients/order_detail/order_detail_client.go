@@ -1,6 +1,5 @@
 package orderDetail
 
-//ORM tradutcotr
 import (
 	"mvc-go/model"
 
@@ -14,15 +13,12 @@ func InsertOrderDetail(orderDetail model.OrderDetail) model.OrderDetail {
 	result := Db.Create(&orderDetail)
 
 	if result.Error != nil {
-		//TODO Manage Errors
 		log.Error("")
 	}
-	//result1 := Db.UpdateColumn()
 	log.Debug("OrderDetail Created: ", orderDetail.Id)
 	result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.IdProduct).Update("stock", gorm.Expr("stock - ? ", orderDetail.Cantidad))
 
 	if result1.Error != nil {
-		//TODO Manage Errors
 		log.Error("Pdto no encontrado")
 	}
 
@@ -32,7 +28,7 @@ func InsertOrderDetail(orderDetail model.OrderDetail) model.OrderDetail {
 func GetOrderDetailByIdOrder(idOrder int) model.OrderDetails {
 	var ordersDetail model.OrderDetails
 
-	Db.Where("id_order = ?", idOrder).Find(&ordersDetail) //traduccion y seteo en orderDetail
+	Db.Where("id_order = ?", idOrder).Find(&ordersDetail)
 	log.Debug("OrderDetail: ", ordersDetail)
 
 	return ordersDetail
@@ -45,15 +41,12 @@ func InsertOrdersDetail(ordersDetail model.OrderDetails) model.OrderDetails {
 		result := Db.Create(&orderDetail)
 
 		if result.Error != nil {
-			//TODO Manage Errors
-			log.Error("")
+			log.Error("Error al crear")
 		}
-		//result1 := Db.UpdateColumn()
 		log.Debug("OrderDetail Created: ", orderDetail.Id)
 		result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.IdProduct).Update("stock", gorm.Expr("stock - ? ", orderDetail.Cantidad))
 
 		if result1.Error != nil {
-			//TODO Manage Errors
 			log.Error("Pdto no encontrado")
 		}
 	}

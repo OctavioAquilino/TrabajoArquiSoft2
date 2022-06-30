@@ -1,9 +1,7 @@
 package services
 
-//lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
-//Se puede reutilizar
 import (
-	categoryCliente "mvc-go/clients/category" //DAO
+	categoryCliente "mvc-go/clients/category"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"

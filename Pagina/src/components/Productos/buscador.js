@@ -7,13 +7,6 @@ export const ProductosBuscador = ()=>{
 
     const [productos,setProductos] = useState([]);
     const [busqueda, setBusqueda]= useState("");
-   /* const requestOptions={
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        
-        body: JSON.stringify({texto:busqueda})
-    };
-*/
     const fetchApi = async()=>{
       
         const response = await fetch('http://localhost:8090/productText/'+busqueda)
@@ -26,7 +19,6 @@ export const ProductosBuscador = ()=>{
             if (result.isConfirmed) {
                 window.location.reload();
             }})
-          //window.location.reload();
        }else{
         
         setProductos(response)

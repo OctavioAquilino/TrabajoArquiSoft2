@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert2";
 
 function LogOut(){
-    //var resultado = window.confirm('Estas seguro?');
+
     swal.fire({
         text: "Estas seguro?",
         icon: 'warning',
@@ -18,12 +18,7 @@ function LogOut(){
             Cookie.set("user", "undefined,undefined", { path: "/" });
             window.location.replace("/login");
         }})
-/*if (resultado === true) {
-    Cookie.set("user", "undefined,undefined", { path: "/" });
-    window.location.reload();
-} else { 
-    window.swal('Pareces indeciso');
-}*/
+
 }
 
   
@@ -52,28 +47,16 @@ export const Header = ()=>{
         <ul>
             <li>
                <Link to="/" className="botones_menu">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
                INICIO
                </Link> 
             </li>
             <li>
                <Link to="/productos" className="botones_menu">
-               <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
                PRODUCTOS
                </Link> 
             </li>
             <li>
                <Link to="/order" className="botones_menu"> 
-               <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
                 MIS COMPRAS
                 </Link> 
             </li>
@@ -85,10 +68,6 @@ export const Header = ()=>{
 
             <li>
                <Link to="/login" className="botones_menu">
-               <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
                 Log In
                 </Link> 
             </li>

@@ -33,7 +33,6 @@ export const CategoryLista =()=>{
         icon: 'error',
         text: "No hay productos en esta categoria",
       })
-      //window.location.reload();
    }else{
     setProductos(response)
     console.log(response);

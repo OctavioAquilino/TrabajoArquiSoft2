@@ -1,9 +1,7 @@
 package services
 
-//lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
-//Se puede reutilizar
 import (
-	userCliente "mvc-go/clients/user" //DAO
+	userCliente "mvc-go/clients/user"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -19,7 +17,6 @@ import (
 type userService struct{}
 
 type userServiceInterface interface {
-	//siempre devuelve dto o error
 	GetUserById(id int) (dto.UserDto, e.ApiError)
 	LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError)
 }
@@ -34,7 +31,7 @@ func init() {
 
 func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 
-	var user model.User = userCliente.GetUserById(id) //objeto de la DB, a traves del DAO
+	var user model.User = userCliente.GetUserById(id)
 	var userDto dto.UserDto
 
 	if user.Id == 0 {

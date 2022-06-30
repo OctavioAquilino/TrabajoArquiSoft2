@@ -1,9 +1,7 @@
 package services
 
-//lugar donde yo defino los metodos que mi clase va a responder (Interfaz de objetos)
-//Se puede reutilizar
 import (
-	productCliente "mvc-go/clients/product" //DAO
+	productCliente "mvc-go/clients/product"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -12,7 +10,6 @@ import (
 type productService struct{}
 
 type productServiceInterface interface {
-	//siempre devuelve dto o error
 	GetProductById(id int) (dto.ProductDto, e.ApiError)
 	GetProducts() (dto.ProductsDto, e.ApiError)
 	GetProductsByIdCategory(idCategory int) (dto.ProductsDto, e.ApiError)
@@ -30,7 +27,7 @@ func init() {
 
 func (s *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 
-	var product model.Product = productCliente.GetProductById(id) //objeto de la DB, a traves del DAO
+	var product model.Product = productCliente.GetProductById(id)
 	var productDto dto.ProductDto
 
 	if product.Id == 0 {
@@ -73,7 +70,7 @@ func (s *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 
 func (s *productService) GetProductsByIdCategory(idCategory int) (dto.ProductsDto, e.ApiError) {
 
-	var products model.Products = productCliente.GetProductsByIdCategory(idCategory) //objeto de la DB, a traves del DAO
+	var products model.Products = productCliente.GetProductsByIdCategory(idCategory)
 	var productsDto dto.ProductsDto
 	if len(products) == 0 {
 		return productsDto, e.NewBadRequestApiError("products not found")
@@ -97,7 +94,7 @@ func (s *productService) GetProductsByIdCategory(idCategory int) (dto.ProductsDt
 
 func (s *productService) GetProductsByText(texto string) (dto.ProductsDto, e.ApiError) {
 
-	var products model.Products = productCliente.GetProductsByText(texto) //objeto de la DB, a traves del DAO
+	var products model.Products = productCliente.GetProductsByText(texto)
 	var productsDto dto.ProductsDto
 	if len(products) == 0 {
 		return productsDto, e.NewBadRequestApiError("products not found")
@@ -119,7 +116,7 @@ func (s *productService) GetProductsByText(texto string) (dto.ProductsDto, e.Api
 
 //random products
 func (s *productService) GetRandomProducts(cantidad int) (dto.ProductsDto, e.ApiError) {
-	var products model.Products = productCliente.GetRandomProducts(cantidad) //objeto de la DB, a traves del DAO
+	var products model.Products = productCliente.GetRandomProducts(cantidad)
 	var productsDto dto.ProductsDto
 	if len(products) == 0 {
 		return productsDto, e.NewBadRequestApiError("products not found")

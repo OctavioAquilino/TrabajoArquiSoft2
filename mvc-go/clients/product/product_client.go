@@ -13,7 +13,7 @@ var Db *gorm.DB
 func GetProductById(id int) model.Product {
 	var product model.Product
 
-	Db.Where("id = ?", id).First(&product) //traduccion y seteo en product
+	Db.Where("id = ?", id).First(&product)
 	log.Debug("Product: ", product)
 
 	return product
@@ -21,7 +21,7 @@ func GetProductById(id int) model.Product {
 
 func GetProducts() model.Products {
 	var products model.Products
-	Db.Find(&products) //busca y guarda todo en products
+	Db.Find(&products)
 
 	log.Debug("Products: ", products)
 
@@ -31,7 +31,7 @@ func GetProducts() model.Products {
 func GetProductsByIdCategory(idCategory int) model.Products {
 	var products model.Products
 
-	Db.Where("id_category = ?", idCategory).Find(&products) //traduccion y seteo en product
+	Db.Where("id_category = ?", idCategory).Find(&products)
 	log.Debug("Product: ", products)
 
 	return products
@@ -48,7 +48,7 @@ func GetProductsByText(texto string) model.Products {
 
 func GetRandomProducts(cantidad int) model.Products {
 	var products model.Products
-	Db.Order("RAND()").Limit(cantidad).Find(&products) //busca y guarda todo en products
+	Db.Order("RAND()").Limit(cantidad).Find(&products)
 
 	log.Debug("Products: ", products)
 

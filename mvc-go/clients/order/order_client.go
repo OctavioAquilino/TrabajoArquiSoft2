@@ -14,7 +14,6 @@ func InsertOrder(order model.Order) model.Order {
 	result := Db.Create(&order)
 
 	if result.Error != nil {
-		//TODO Manage Errors
 		log.Error("")
 	}
 	log.Debug("Order Created: ", order.Id)
@@ -26,7 +25,7 @@ func GetOrdersByIdUser(idUser int) model.Orders {
 	var orders model.Orders
 
 	log.Debug("idUser: ", idUser)
-	Db.Where("id_user = ?", idUser).Find(&orders) //traduccion y seteo en order
+	Db.Where("id_user = ?", idUser).Find(&orders)
 	log.Debug("Order: ", orders)
 
 	return orders
@@ -36,7 +35,6 @@ func UpdateMontoFinal(monto float32, idOrder int) float32 {
 	result := Db.Model(&model.Order{}).Where("id = ?", idOrder).Update("monto_final", monto)
 
 	if result.Error != nil {
-		//TODO Manage Errors
 		log.Error("Order no encontrada")
 	}
 	return monto

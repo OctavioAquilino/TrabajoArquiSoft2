@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  localhost:
+  database:
     build: ./db
     environment:
       MYSQL_DATABASE: trabajoarqui
@@ -17,15 +17,14 @@ services:
   front:
     build: ./Pagina
     depends_on:
-      localhost:
+      database:
         condition: service_healthy
     ports:
       - "3000:3000"
   back:
     build: ./mvc-go
-    restart: on-failure
     depends_on:
-      localhost:
+      database:
         condition: service_healthy
     ports:
       - "8090:8090"

@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strconv"
 
-	//"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
@@ -14,10 +13,10 @@ import (
 func GetProductById(c *gin.Context) {
 	log.Debug("Product id to load: " + c.Param("id"))
 
-	id, _ := strconv.Atoi(c.Param("id")) //se pasa el id de array a int
+	id, _ := strconv.Atoi(c.Param("id"))
 	var productDto dto.ProductDto
 
-	productDto, err := service.ProductService.GetProductById(id) //delega el trabajo al service
+	productDto, err := service.ProductService.GetProductById(id)
 
 	if err != nil {
 		c.JSON(err.Status(), err)
@@ -28,7 +27,7 @@ func GetProductById(c *gin.Context) {
 
 func GetProducts(c *gin.Context) {
 	var productsDto dto.ProductsDto
-	productsDto, err := service.ProductService.GetProducts() //delega
+	productsDto, err := service.ProductService.GetProducts()
 
 	if err != nil {
 		c.JSON(err.Status(), err)
@@ -38,14 +37,13 @@ func GetProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, productsDto)
 }
 
-//filtros por categoria
 func GetProductsByIdCategory(c *gin.Context) {
 	log.Debug("Product id to load: " + c.Param("idCategory"))
 
-	idCategory, _ := strconv.Atoi(c.Param("idCategory")) //se pasa el id de array a int
+	idCategory, _ := strconv.Atoi(c.Param("idCategory"))
 	var productsDto dto.ProductsDto
 
-	productsDto, err := service.ProductService.GetProductsByIdCategory(idCategory) //delega el trabajo al service
+	productsDto, err := service.ProductService.GetProductsByIdCategory(idCategory)
 
 	if err != nil {
 		c.JSON(err.Status(), err)
@@ -57,38 +55,11 @@ func GetProductsByIdCategory(c *gin.Context) {
 //Productos por TEXTO
 func GetProductsByText(c *gin.Context) {
 
-	/*
-		log.Debug("Text looking: " + c.Param("texto"))
-		var texto string = c.Param("texto")
-	*/
-	//var textoDto dto.TextoDto
-	//var texto string
-
-	//err1 := c.BindJSON(&textoDto)
-
-	//var texto string = textoDto.Texto
 	var text string = c.Param("texto")
 	log.Debug("texto:", text)
-	/*if err1 != nil {
-		log.Error(err1.Error())
-		c.JSON(http.StatusBadRequest, err1.Error())
-		return
-	}
-	*/
-	/*var texto string
-	for _, letra := range text {
-
-		//l := strconv.QuoteRune(letra)
-		l, _ := strconv.Unquote(strconv.QuoteRune(letra))
-		if letra == '+' {
-			l = " "
-		}
-		texto = texto + l
-	}*/
-	//manejar errores
 	var productsDto dto.ProductsDto
 
-	productsDto, err := service.ProductService.GetProductsByText(text) //delega el trabajo al service
+	productsDto, err := service.ProductService.GetProductsByText(text)
 
 	if err != nil {
 		c.JSON(err.Status(), err)
@@ -99,12 +70,10 @@ func GetProductsByText(c *gin.Context) {
 
 //Productos aleatorios
 func GetRandomProducts(c *gin.Context) {
-	//	log.Debug("Product id to load: " + c.Param("idCategory"))
-
-	cantidad, _ := strconv.Atoi(c.Param("cantidad")) //se pasa el id de array a int
+	cantidad, _ := strconv.Atoi(c.Param("cantidad"))
 	var productsDto dto.ProductsDto
 
-	productsDto, err := service.ProductService.GetRandomProducts(cantidad) //delega el trabajo al service
+	productsDto, err := service.ProductService.GetRandomProducts(cantidad)
 
 	if err != nil {
 		c.JSON(err.Status(), err)

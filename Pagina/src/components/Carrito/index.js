@@ -143,21 +143,7 @@ async function setCart(setter, setterTotal){
 function Cart(){
   const [cartProducts, setCartProducts] = useState([]);
   const [total, setTotal] = useState(0);
- // const [id_user, setUser] = useState("")
-  /*
-  let cookieUser = Cookie.get("user")
-  
-  let token = "undefined";
-  if(cookieUser!=undefined){
-  let array = cookieUser.split(",")
-   setUser(array[0])
-   token=array[1]
-  }
-  else{
-       setUser("undefined")
-  }
-   */
-
+ 
   if (cartProducts.length <= 0 ){
     setCart(setCartProducts, setTotal)
   }
